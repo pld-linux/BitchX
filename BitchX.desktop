@@ -6,5 +6,5 @@ Comment[pl]=Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Comment[pt_BR]=Cliente IRC para o console do Linux
 Exec=BitchX
 Icon=BitchX.png
-Terminal=1
+Terminal=true
 Type=Application
