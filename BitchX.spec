@@ -1,16 +1,16 @@
 Summary:     Improved color IRC client with built-in scripts
+Summary(pl): Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Name:        BitchX
 Version:     75p1
-Release:     2
+Release:     3
 Copyright:   GPL
 Group:       Applications/Communications
 Group(pl):   Aplikacje/Komunikacja
 Source0:     ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
 Source1:     ftp://ftp.acronet.net/pub/ircii/epic3.004-help.tar.gz
-Source2:     BitchX.wmconfig
-Patch0:      BitchX.patch
-BuildRoot:   /tmp/buildroot-%{name}-%{version}
-Summary(pl): Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
+Source2:     %{name}.wmconfig
+Patch:       %{name}.patch
+BuildRoot:   /tmp/%{name}-%{version}-root
  
 %description 
 BitchX is a popular ANSI color ircII client by panasync. It
@@ -53,11 +53,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644, root, root, 755) 
 %doc Changes  doc/* BitchX.quit BitchX.reasons
 %config(noreplace) %verify(not md5 size mtime) /etc/irc/*
-/etc/X11/wmconfig/BitchX
+%config(missingok) /etc/X11/wmconfig/BitchX
+
 %attr(755, root, root) /usr/bin/*
 %attr(644, root, root) /usr/lib/BitchX
 
 %changelog
+* Tue Feb  9 1999 Micha³ Kuratczyk <kurkens@polbox.com>
+  [75-3]
+- sloted BuildRoot into PLD standard
+- added %config(missingok) for wmconfig file
+- cosmetic changes
+
 * Thu Oct 13 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [75-2]
 - removed /etc/ircII.servers,
