@@ -8,7 +8,7 @@ Release:	1
 %define	pre	-final
 License:	GPL
 Group:		Applications/Networking
-Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}%{pre}.tar.gz
+Source0:	ftp://ftp.bitchx.org/pub/BitchX/source/ircii-pana-%{version}%{pre}.tar.gz
 # Source0-md5:	611d2dda222f00c10140236f4c331572
 Source1:	ircII.servers
 Source2:	%{name}.desktop
