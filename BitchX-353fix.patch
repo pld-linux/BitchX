@@ -1,0 +1,14 @@
+--- BitchX/source/funny.c.orig	Thu Feb 20 12:15:02 2003
++++ BitchX/source/funny.c	Thu Feb 20 12:15:06 2003
+@@ -158,6 +158,10 @@
+ 	channel = ArgList[0];
+ 	user_cnt = ArgList[1];
+ 	line = PasteArgs(ArgList, 2);
++	if (channel == NULL || line == NULL) { 
++	bitchsay("Invalid number of arguments for %s", __FUNCTION__); 
++	return; 
++	} 
+ 	if (funny_flags & FUNNY_TOPIC && !(line && *line))
+ 			return;
+ 	cnt = my_atol(user_cnt);
+

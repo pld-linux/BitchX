@@ -18,6 +18,7 @@ Patch2:		%{name}-dcc-force-port.patch
 Patch3:		%{name}-doc.patch
 Patch4:		%{name}-emacs.patch
 Patch5:		%{name}-versioned-tcl.patch
+Patch6:		%{name}-353fix.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.com/
 BuildRequires:	mysql-devel
@@ -68,6 +69,7 @@ powtarzaj± siê te same pytania.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
