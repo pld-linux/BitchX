@@ -6,10 +6,10 @@ Release:     2
 Copyright:   GPL
 Group:       Applications/Communications
 Group(pl):   Aplikacje/Komunikacja
-Source:      ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
-Source2:     ftp://ftp.acronet.net/pub/ircii/epic3.004-help.tar.gz
-Source3:     BitchX.wmconfig
-Patch:       BitchX.patch
+Source0:     ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
+Source1:     ftp://ftp.acronet.net/pub/ircii/epic3.004-help.tar.gz
+Source2:     BitchX.wmconfig
+Patch0:      BitchX.patch
 BuildRoot:   /tmp/%{name}-%{version}-root
  
 %description 
@@ -22,12 +22,13 @@ BitchX jest popularnym klientem ircII. Jego interfejs jest bardziej
 kolorowy i przej¿ysty ni¿ interfejs standardowego kilienta ircII.
 
 %prep
-%setup -q -n %{name} -b 2
-%patch  -p1
-%patch1 -p1
+%setup -q -n %{name}
+%setup -q -a 1 -n %{name}
+%patch -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=/usr
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
+	--prefix=/usr
 make all
 
 %install
@@ -43,7 +44,7 @@ install install-bitchx $RPM_BUILD_ROOT/usr/bin
 install BitchX.help $RPM_BUILD_ROOT/usr/lib/BitchX
 cp -r help $RPM_BUILD_ROOT/usr/lib/BitchX
 
-install %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/wmconfig/BitchX
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/wmconfig/BitchX
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -52,7 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644, root, root, 755) 
 %doc Changes  doc/* BitchX.quit BitchX.reasons
 %config(noreplace) %verify(not md5 size mtime) /etc/irc/*
-/etc/X11/wmconfig/Bitch
+/etc/X11/wmconfig/BitchX
 %attr(755, root, root) /usr/bin/*
 %attr(644, root, root) /usr/lib/BitchX
 
@@ -61,6 +62,7 @@ rm -rf $RPM_BUILD_ROOT
   [75-2]
 - removed /etc/ircII.servers,
 - added wmconfig file,
+- added second %setup for unpacking second Source,
 - fixed: removed %attr(644, root, root) from /usr/lib/BitchX.
 
 * Thu Oct 01 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
