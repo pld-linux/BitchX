@@ -2,17 +2,16 @@ Summary:	Improved color IRC client with built-in scripts
 Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Name:		BitchX
 Version:	1.0c15
-Release:	1
+Release:	2	
 Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/%{name}-%{version}.tar.gz
-Source1:	BitchX.config.h
+Source1:	BitchX-config.h
 Source2:	ircII.servers
 Copyright:	GPL
 Group:		Applications/Networking
 Group(pl):	Aplikacje/Sieciowe
 Patch0:		%{name}-configure.patch
 Patch1:		%{name}-pld.patch
-Patch2:		%{name}-iso2.patch
-Patch3:         %{name}-antiroot.patch
+Patch2:         %{name}-antiroot.patch
 URL:		http://www.bitchx.com/
 BuildRoot:	/tmp/%{name}-%{version}-root
  
@@ -30,12 +29,9 @@ kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
-#gzip -dc %{SOURCE2} | tar -xf -
-
-cp -f %{SOURCE1} source/config.h
+cp -f %{SOURCE1} include/config.h
 
 autoconf
 
