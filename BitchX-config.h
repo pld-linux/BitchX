@@ -84,10 +84,10 @@
 			"irc.homelien.no "\
 			"irc.rt.ru "\
 			"[ircnet] "\
-			"poznan.irc.pl" \
-			"warszawa.irc.pl" \
-			"lublin.irc.pl" \
-			"krakow.irc.pl" \
+			"poznan.irc.pl " \
+			"warszawa.irc.pl " \
+			"lublin.irc.pl " \
+			"krakow.irc.pl " \
 			"irc.webbernet.net "\
 			"irc.stealth.net "\
 			"irc.funet.fi "\
@@ -146,7 +146,9 @@
 			"irc.anynet.org "\
 			"irc.slashnet.org "\
 			"radon.slashnet.org "\
-			"irc.dude-suit.net"
+			"irc.dude-suit.net "\
+			"irc.krushnet.org "\
+			"irc.solarconnections.com"
 #endif
 
 /*
@@ -307,7 +309,7 @@
  * This is recommended when you want to start BitchX in an xterm without
  * the usage of the special "vga"-font. 
  */
-#undef ONLY_STD_CHARS
+#define ONLY_STD_CHARS
 
 /*
  * Normally BitchX uses only the IBMPC (cp437) charset.
@@ -388,7 +390,7 @@
 #define DEFAULT_BLINK_VIDEO ON
 #define DEFAULT_CHANNEL_NAME_WIDTH 10
 #define DEFAULT_CLOCK ON
-#define DEFAULT_CLOCK_24HOUR OFF
+#define DEFAULT_CLOCK_24HOUR ON
 #define DEFAULT_COMMAND_MODE OFF
 #define DEFAULT_COMMENT_HACK ON
 #define DEFAULT_DCC_BLOCK_SIZE 2048
@@ -574,7 +576,7 @@
 #define WANT_DETACH ON	/* this is here for the detach/re-attach code
 			   which is essentially a mini-screen */
 #define ALLOW_DETACH ON
-
+#define DEFAULT_DETACH_ON_HUP OFF
 
 #undef OLD_RANDOM_BEHAVIOR   /* semi randomness for randm() */
 
@@ -623,7 +625,7 @@
 #define DEFAULT_CTOOLZ_DIR "~/bx-conf"
 #endif
 #define DEFAULT_SCRIPT_HELP_FILE DEFAULT_CTOOLZ_DIR"/BitchX.hlp"
-#define DEFAULT_BITCHX_HELP_FILE DEFAULT_CTOOLZ_DIR"/BitchX.hlp"
+#define DEFAULT_BITCHX_HELP_FILE IRC_LIB"/BitchX.help"
 #else
 #define DEFAULT_MSGLOGFILE "BitchX.away"
 #define DEFAULT_CTOOLZ_DIR "~/.BitchX"
@@ -770,6 +772,10 @@
 #endif
 
 #define DEFAULT_TKLINE_TIME 10
+#define DEFAULT_BOTCHAR '.'		/* default char to enter dcc chat. */
+					/* oper serv's tend to send .'s */
+
+#define WANT_CORE
 
 #undef OFF
 #undef ON
