@@ -1,127 +1,36 @@
-diff -ur BitchX.orig/Makefile.in BitchX/Makefile.in
---- BitchX.orig/Makefile.in	Sat Nov 28 05:31:21 1998
-+++ BitchX/Makefile.in	Wed Jul  7 15:56:35 1999
-@@ -22,7 +22,7 @@
- # Where the ircII library will be.  Generally this is the place that
+diff -ru BitchX/Makefile.in BitchX.AX/Makefile.in
+--- BitchX/Makefile.in	Fri Nov 19 19:15:08 1999
++++ BitchX.AX/Makefile.in	Thu Jan 20 20:14:47 2000
+@@ -42,7 +42,7 @@
+ # Where the BitchX library will be.  Generally this is the place that
  # you put the scripts, help pages and translation tables.  It is
  # very important that you set this correctly.
 -IRCLIB = @IRCLIB@
 +IRCLIB = ${prefix}/share/BitchX
  
- PMOS2 = @WITH_PM@
+ CC = @CC@
+ DEFS = -I../include
+@@ -97,10 +97,10 @@
  
-@@ -109,8 +109,8 @@
- # INSTALL_HELP_CMD = @echo The help files have not been installed.
- INSTALL_HELP_CMD = @INSTALL_HELP_CMD@
- 
--INSTALL_WSERV = $(bindir)/wserv
--INSTALL_SCRBX = $(bindir)/scr-bx
+ # This program allows you to use screen/xterm's to put new BitchX windows
+ # on new screen/xterm windows.
+-INSTALL_WSERV = @INSTALL_WSERV@
 +INSTALL_WSERV = $(IRCLIB)/wserv
+ 
+ # This program allows you to screen BitchX and reattach to it later.
+-INSTALL_SCRBX = @INSTALL_SCRBX@
 +INSTALL_SCRBX = $(IRCLIB)/scr-bx
  
  ## You shouldn't have to change anything below here
  
-diff -ur BitchX.orig/include/config.h BitchX/include/config.h
---- BitchX.orig/include/config.h	Tue Feb 23 16:59:14 1999
-+++ BitchX/include/config.h	Wed Jul  7 16:09:12 1999
-@@ -33,7 +33,7 @@
-  * too peruse this function all you like. It's not a BACKDOOR in any way, 
-  * shape or form.
+diff -ru BitchX/source/translat.c BitchX.AX/source/translat.c
+--- BitchX/source/translat.c	Sun Oct 31 12:41:56 1999
++++ BitchX.AX/source/translat.c	Thu Jan 20 20:16:26 2000
+@@ -36,7 +36,7 @@
+ /* we have this here as a safety feature if for some reason TRANSLATION_PATH
+  * is not defined.
   */
--#define WANT_NOTIFY_BITCHX_COM ON
-+#undef WANT_NOTIFY_BITCHX_COM
- 
- 
- /*
-@@ -120,8 +120,13 @@
- 			"irc-rr.vitamina.ca "\
- 			"irc.phrozen.org "\
- 			"irc.openface.ca "\
--			"irc.u-net.com:6673"\
--			"insane.loonybin.net"
-+			"irc.u-net.com:6673 "\
-+			"insane.loonybin.net "\
-+			"[ircnet] "\
-+			"warszawa.irc.pl "\
-+			"lublin.irc.pl "\
-+			"krakow.irc.pl "\
-+			"poznan.irc.pl"
- #endif
- 
- /*
-@@ -167,7 +172,7 @@
- #if defined(WINNT) || defined(__EMX__)
- #define SERVERS_FILE "irc-serv"
- #else
--#define SERVERS_FILE "ircII.servers"
-+#define SERVERS_FILE "/etc/irc/ircII.servers"
- #endif
- 
- /*
-@@ -181,14 +186,14 @@
-  * we define the default network type for server groups. Do not just
-  * undefine this.
-  */
-- #define DEFAULT_NETWORK "efnet"
-+ #define DEFAULT_NETWORK "ircnet"
- 
- /*
-  * defining this enables translation to occur. You need a copy of the 
-  * translation tables from ircII for this to work. Also enable /set TRANSLATE
-  */
-  
 -#define TRANSLATION_PATH "/usr/local/lib/bx/translation"
-+#define TRANSLATION_PATH "/usr/share/BitchX/translation"
- 
- /*
-  * Below are the IRCII variable defaults.  For boolean variables, use 1 for
-@@ -232,7 +237,7 @@
-  * in the client. defining this variable to 1 allows that happen. It also
-  * adds a HEBREW_TOGGLE variable which can turn this feature on/off
-  */
--#undef WANT_HEBREW
-+#define WANT_HEBREW
- 
- /* if you use cidentd the filename is called .authlie instead of .noident.
-  * as well some modifications to the format of the file were made. So we 
-@@ -569,7 +574,7 @@
- #define DEFAULT_SHELL "/bin/sh"
- #define DEFAULT_SHELL_FLAGS "-c"
- #define DEFAULT_USERINFO ""
--#define DEFAULT_XTERM "rxvt"
-+#define DEFAULT_XTERM "xterm-color"
- #define DEFAULT_XTERM_OPTIONS "-bg black -fg white"
- #define DEFAULT_DCC_DLDIR "~"
- 
-@@ -586,7 +591,7 @@
- #define DEFAULT_MSGLOGFILE "BitchX.away"
- #define DEFAULT_CTOOLZ_DIR "~/.BitchX"
- #define DEFAULT_SCRIPT_HELP_FILE DEFAULT_CTOOLZ_DIR"/BitchX.help"
--#define DEFAULT_BITCHX_HELP_FILE DEFAULT_CTOOLZ_DIR"/BitchX.help"
-+#define DEFAULT_BITCHX_HELP_FILE IRCLIB"/BitchX.help"
- #endif
- 
- #define DEFAULT_PAD_CHAR ' '
-diff -ur BitchX.orig/include/irc.h BitchX/include/irc.h
---- BitchX.orig/include/irc.h	Sun Feb 21 23:54:38 1999
-+++ BitchX/include/irc.h	Wed Jul  7 15:56:35 1999
-@@ -140,7 +140,7 @@
- #define RAND_MAX 2147483647
- #endif
- 
--#define NICKNAME_LEN 15
-+#define NICKNAME_LEN 30
- #define NAME_LEN 80
- #define REALNAME_LEN 50
- #define PATH_LEN 1024
-diff -ur BitchX.orig/source/translat.c BitchX/source/translat.c
---- BitchX.orig/source/translat.c	Mon Oct 19 00:44:10 1998
-+++ BitchX/source/translat.c	Wed Jul  7 15:56:35 1999
-@@ -32,7 +32,7 @@
- #include "hebrew.h"
- 
- #ifndef TRANSLATION_PATH
--#define TRANSLATION_PATH "/usr/local/lib/irc/translation"
 +#define TRANSLATION_PATH "/usr/share/BitchX/translation"
  #endif
  
