@@ -2,7 +2,7 @@ Summary:	Improved color IRC client with built-in scripts
 Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Name:		BitchX
 Version:	1.0c16
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/Networking
 Group(pl):	Aplikacje/Sieciowe
@@ -10,9 +10,9 @@ Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/%{name}-%{version}.tar.gz
 Source1:	BitchX-config.h
 Source2:	ircII.servers
 Source3:	BitchX.desktop
+Source4:	BitchX-bxglobal.script
 Patch0:		BitchX-configure.patch
 Patch1:		BitchX-pld.patch
-Patch2:		BitchX-iso2.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.com/
 BuildRequires:	ncurses-devel >= 5.0
@@ -31,7 +31,6 @@ kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
 %setup -q -n %{name}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 cp -f %{SOURCE1} include/config.h
@@ -49,7 +48,7 @@ export CFLAGS LDFLAGS
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_datadir}/BitchX/{script,translation,help} \
-$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}/irc} \
+	$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}/irc} \
 	$RPM_BUILD_ROOT{%{_applnkdir}/Network/IRC,%{_prefix}/X11R6/share/pixmaps}
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/irc
@@ -66,6 +65,7 @@ install BitchX.help $RPM_BUILD_ROOT%{_datadir}/BitchX
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Network/IRC
 install doc/BitchX.png $RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
 
+install %{SOURCE4} $RPM_BUILD_ROOT%{_datadir}/BitchX/script/bxglobal
 cp -a bitchx-docs/* $RPM_BUILD_ROOT%{_datadir}/BitchX/help
 cp -a translation $RPM_BUILD_ROOT%{_datadir}/BitchX
 rm -rf $RPM_BUILD_ROOT%{_datadir}/BitchX/help/CVS
