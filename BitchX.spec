@@ -53,10 +53,10 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/irc
 install %{SOURCE3} $RPM_BUILD_ROOT%{_mandir}/man1
 echo .so bitchx.1 > $RPM_BUILD_ROOT%{_mandir}/man1/BitchX.1
 
-install source/BitchX $RPM_BUILD_ROOT/usr/bin
-install source/wserv $RPM_BUILD_ROOT/usr/bin/wserv-bx
-install source/scr-bx $RPM_BUILD_ROOT/usr/bin
-install install-bitchx $RPM_BUILD_ROOT/usr/bin
+install source/BitchX $RPM_BUILD_ROOT%{_bindir}
+install source/wserv $RPM_BUILD_ROOT%{_bindir}/wserv-bx
+install source/scr-bx $RPM_BUILD_ROOT%{_bindir}
+install install-bitchx $RPM_BUILD_ROOT%{_bindir}
 
 install BitchX.help $RPM_BUILD_ROOT%{_libdir}/BitchX
 cp -r help $RPM_BUILD_ROOT%{_libdir}/BitchX
@@ -71,7 +71,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755) 
 %doc Changes.gz doc/* BitchX* 
 
-%attr(755,root,root) /usr/bin/*
+%attr(755,root,root) %{_bindir}/*
 
 %{_libdir}/BitchX
 
