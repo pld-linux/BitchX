@@ -5,6 +5,7 @@ Version:	1.0c17
 Release:	5
 License:	GPL
 Group:		Applications/Networking
+Group(de):	Applikationen/Netzwerkwesen
 Group(pl):	Aplikacje/Sieciowe
 Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/%{name}-%{version}.tar.gz
 Source1:	%{name}-config.h
@@ -41,7 +42,6 @@ cp -f %{SOURCE1} include/config.h
 autoconf
 
 CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w -I%{_includedir}/ncurses"
-export CFLAGS
 %configure \
 	--enable-ipv6 \
 	--with-plugins \
@@ -78,7 +78,7 @@ install dll/*.so	$RPM_BUILD_ROOT%{_libdir}/BitchX
 
 install doc/BitchX.1	$RPM_BUILD_ROOT%{_mandir}/man1
 
-gzip -9nf doc/BitchX{-format,-idea,.bot,.doc,.faq,.tcl} IPv6-support 
+gzip -9nf doc/BitchX{-format,-idea,.bot,.doc,.faq,.tcl} IPv6-support
 
 %clean
 rm -rf $RPM_BUILD_ROOT
