@@ -1,131 +1,28 @@
-diff -ru BitchX-old/source/banlist.c BitchX/source/banlist.c
---- BitchX-old/source/banlist.c	2002-02-28 06:22:46.000000000 +0200
-+++ BitchX/source/banlist.c	2003-03-13 20:09:01.000000000 +0200
-@@ -277,30 +277,30 @@
- 		case 7:
- 			if (ip)
- 			{
--				sprintf(banstr, "*!*@%s", cluster(ip));
-+				snprintf(banstr, sizeof(banstr), "*!*@%s", cluster(ip));
- 				break;
- 			}
- 		case 2: /* Better 	*/
--			sprintf(banstr, "*!*%s@%s", t1, cluster(host));
-+			snprintf(banstr, sizeof(banstr), "*!*%s@%s", t1, cluster(host));
- 			break;
- 		case 3: /* Host 	*/
--			sprintf(banstr, "*!*@%s", host);
-+			snprintf(banstr, sizeof(banstr), "*!*@%s", host);
- 			break;
- 		case 4: /* Domain	*/
--			sprintf(banstr, "*!*@*%s", strrchr(host, '.'));
-+			snprintf(banstr, sizeof(banstr), "*!*@*%s", strrchr(host, '.'));
- 			break;
- 		case 5: /* User		*/
--			sprintf(banstr, "*!%s@%s", t, cluster(host));
-+			snprintf(banstr, sizeof(banstr), "*!%s@%s", t, cluster(host));
- 			break;
- 		case 6: /* Screw 	*/
- 			malloc_sprintf(&tmpstr, "*!*%s@%s", t1, host);
--			strcpy(banstr, screw(tmpstr));
-+			strmcpy(banstr, screw(tmpstr), sizeof(banstr)-1);
- 			new_free(&tmpstr);
- 			break;
- 		case 1:	/* Normal 	*/
- 		default:
- 		{
--			sprintf(banstr, "%s!*%s@%s", nick, t1, host);
-+			snprintf(banstr, sizeof(banstr), "%s!*%s@%s", nick, t1, host);
- 			break;
- 		}
- 	}
-diff -ru BitchX-old/source/ctcp.c BitchX/source/ctcp.c
---- BitchX-old/source/ctcp.c	2002-02-28 06:22:47.000000000 +0200
-+++ BitchX/source/ctcp.c	2003-03-13 19:59:35.000000000 +0200
-@@ -1482,6 +1482,7 @@
- 	     *putbuf2;
- 	int len;
- 	len = IRCD_BUFFER_SIZE - (12 + strlen(to));
-+	if (len <= 2) return;
- 	putbuf2 = alloca(len);
- 
- 	if (format)
-diff -ru BitchX-old/source/misc.c BitchX/source/misc.c
---- BitchX-old/source/misc.c	2002-03-24 11:31:07.000000000 +0200
-+++ BitchX/source/misc.c	2003-03-13 20:02:13.000000000 +0200
-@@ -3121,19 +3121,19 @@
- 	{
- 		if (*hostname == '~')
- 			hostname++;
--		strcpy(result, hostname);
-+		strmcpy(result, hostname, sizeof(result)-1);
- 		*strchr(result, '@') = '\0';
- 		if (strlen(result) > 9)
- 		{
- 			result[8] = '*';
- 			result[9] = '\0';
- 		}
--		strcat(result, "@");
-+		strmcat(result, "@", sizeof(result)-1);
- 		if (!(hostname = strchr(hostname, '@')))
- 			return NULL;
- 		hostname++;
- 	}
--	strcpy(host, hostname);
-+	strmcpy(host, hostname, sizeof(host)-1);
- 
- 	if (*host && isdigit(*(host + strlen(host) - 1)))
- 	{
-@@ -3154,8 +3154,8 @@
-                 for (i = 0; i < count; i++)
-                         tmp = strchr(tmp, '.') + 1;
-                 *tmp = '\0';
--                strcat(result, host);
--                strcat(result, "*");
-+                strmcat(result, host, sizeof(result)-1);
-+                strmcat(result, "*", sizeof(result)-1);
- 	}
- 	else
- 	{
-@@ -3177,10 +3177,10 @@
- 			else
- 				return (char *) NULL;
- 		}
--		strcat(result, "*");
-+		strmcat(result, "*", sizeof(result)-1);
+diff -urN BitchX/source/misc.c BitchX-patched/source/misc.c
+--- BitchX/source/misc.c	2003-06-11 07:00:42.000000000 +0000
++++ BitchX-patched/source/misc.c	2004-06-13 21:16:32.000000000 +0000
+@@ -3114,7 +3114,7 @@
+ 	atsign = strchr(hostname, '@');
+ 	if (atsign) {
+ 		if (*hostname == '~') {
+-			strcpy(result, "~*@");
++			strmcpy(result, "~*@", sizeof(result)-1);
+ 		} else {
+ 			size_t ident_len = atsign - hostname;
+ 			
+@@ -3184,7 +3184,7 @@
+ 		 * result is 11 */
+ 		strcat(result, "*");
  		if (my_stricmp(host, temphost))
 -			strcat(result, ".");
--		strcat(result, host);
 +			strmcat(result, ".", sizeof(result)-1);
-+		strmcat(result, host, sizeof(result)-1);
+ 		strlcat(result, host, sizeof result);
  	}
  	return result;
- }
-diff -ru BitchX-old/source/names.c BitchX/source/names.c
---- BitchX-old/source/names.c	2002-03-25 22:47:30.000000000 +0200
-+++ BitchX/source/names.c	2003-03-13 20:10:26.000000000 +0200
-@@ -572,7 +572,7 @@
- 
-    	*nmodes = 0;
-    	*nargs = 0;
--	for (; *modes; modes++) 
-+	for (; *modes && strlen(nmodes) < sizeof(nmodes)-2; modes++)
- 	{
- 		isbanned = isopped = isvoiced = 0;
- 		switch (*modes) 
-@@ -742,7 +742,7 @@
- 
-    /* modes which can be done multiple times are added here */
- 
--	for (tucm = ucm; tucm; tucm = tucm->next) 
-+	for (tucm = ucm; tucm && strlen(nmodes) < sizeof(nmodes)-2; tucm = tucm->next)
- 	{
- 		if (tucm->o_ed) 
- 		{
-diff -ru BitchX-old/source/notice.c BitchX/source/notice.c
---- BitchX-old/source/notice.c	2002-02-28 06:22:50.000000000 +0200
-+++ BitchX/source/notice.c	2003-03-13 20:07:39.000000000 +0200
-@@ -422,10 +422,10 @@
+diff -urN BitchX/source/notice.c BitchX-patched/source/notice.c
+--- BitchX/source/notice.c	2003-04-11 01:09:07.000000000 +0000
++++ BitchX-patched/source/notice.c	2004-06-13 21:11:16.000000000 +0000
+@@ -422,7 +422,7 @@
  	{
  		char *q = strchr(line, ':');
  		char *port = empty_string;
@@ -133,11 +30,7 @@ diff -ru BitchX-old/source/notice.c BitchX/source/notice.c
 +		int conn = strlen(line) > 7 && !strncmp(line+7, "connect", 7) ? 1 : 0;
  		int dalnet = 0, ircnet = 0;
  
--		if (*(line+18) == ':')
-+		if (strlen(line) > 18 && *(line+18) == ':')
- 			q = NULL;
- 		else
- 			dalnet = (q == NULL);
+ 		if (strlen(line) >= 19 && line[18] == ':')
 @@ -462,7 +462,7 @@
  		    else sscanf(p, "%s was %s from %s", for_, fr, temp);
  
@@ -147,10 +40,10 @@ diff -ru BitchX-old/source/notice.c BitchX/source/notice.c
  		    if (!conn) 
  		    {
  			port = strstr(temp2, "reason:");
-diff -ru BitchX-old/source/server.c BitchX/source/server.c
---- BitchX-old/source/server.c	2002-03-25 07:21:24.000000000 +0200
-+++ BitchX/source/server.c	2003-03-13 20:10:00.000000000 +0200
-@@ -474,11 +474,11 @@
+diff -urN BitchX/source/server.c BitchX-patched/source/server.c
+--- BitchX/source/server.c	2003-06-11 07:00:43.000000000 +0000
++++ BitchX-patched/source/server.c	2004-06-13 21:02:39.000000000 +0000
+@@ -513,11 +513,11 @@
  					}
  					else
  #endif
@@ -164,7 +57,7 @@ diff -ru BitchX-old/source/server.c BitchX/source/server.c
  			}
  			switch (junk)
  			{
-@@ -1741,7 +1741,7 @@
+@@ -1777,7 +1777,7 @@
  			default:
  				if (FD_ISSET(des, &rd))
  				{
@@ -173,10 +66,12 @@ diff -ru BitchX-old/source/server.c BitchX/source/server.c
  						flushing = 0;
  				}
  				break;
-@@ -1751,7 +1751,7 @@
+@@ -1787,7 +1787,7 @@
  	FD_ZERO(&rd);
  	FD_SET(des, &rd);
  	if (new_select(&rd, NULL, &timeout) > 0)
 -		dgets(buffer, des, 1, BIG_BUFFER_SIZE, NULL);
 +		dgets(buffer, des, 1, BIG_BUFFER_SIZE/2, NULL);
  }
+ 
+ 
