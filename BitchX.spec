@@ -35,7 +35,7 @@ kolorowy i przej¿ysty ni¿ interfejs standardowego kilienta ircII.
 gzip -dc %{SOURCE2} | tar -xf -
 
 CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr
 make all 
 
