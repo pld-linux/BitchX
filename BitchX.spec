@@ -47,15 +47,18 @@ CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w -I%{_includedir}/ncurses"
 	--with-plugins \
 	--with-plugindir=%{_libdir}/BitchX
 
-%{__make} 
+%{__make} INSTALL_WSERV=%{_bindir}/wserv-bx
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_prefix}/X11R6/share/pixmaps,%{_libdir}/BitchX,%{_applnkdir}/Network/IRC,%{_sysconfdir}/irc,%{_datadir}/BitchX/{script,translation,help},%{_mandir}/man1}
 
-install source/{BitchX,scr-bx,wserv} \
+install source/{BitchX,scr-bx} \
 			$RPM_BUILD_ROOT%{_bindir}
+
+install source/wserv \
+			$RPM_BUILD_ROOT%{_bindir}/wserv-bx
 
 install doc/BitchX.png	$RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
 
