@@ -1,7 +1,7 @@
 Summary:	Improved color IRC client with built-in scripts
 Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Name:		BitchX
-Version:	1.0c16
+Version:	1.0c17
 Release:	5
 License:	GPL
 Group:		Applications/Networking
@@ -13,6 +13,7 @@ Source3:	%{name}.desktop
 Source4:	%{name}-bxglobal.script
 Patch0:		%{name}-configure.patch
 Patch1:		%{name}-pld.patch
+Patch2:		%{name}-plugindir.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.com/
 BuildRequires:	ncurses-devel >= 5.0
@@ -29,58 +30,64 @@ kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
 
 %prep
 %setup -q -n %{name}
+find . -type d -name 'CVS'| xargs rm -rf
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 cp -f %{SOURCE1} include/config.h
 
 autoconf
 
-CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w -I%{_includedir}/ncurses" LDFLAGS="-s"
-export CFLAGS LDFLAGS
+CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w -I%{_includedir}/ncurses"
+export CFLAGS
 %configure \
-	--enable-ipv6
+	--enable-ipv6 \
+	--with-plugins \
+	--with-plugindir=%{_libdir}/BitchX
 
-%{__make} all 
+%{__make} 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_datadir}/BitchX/{script,translation,help} \
-	$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}/irc} \
-	$RPM_BUILD_ROOT{%{_applnkdir}/Network/IRC,%{_prefix}/X11R6/share/pixmaps}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_prefix}/X11R6/share/pixmaps,%{_libdir}/BitchX,%{_applnkdir}/Network/IRC,%{_sysconfdir}/irc,%{_datadir}/BitchX/{script,translation,help},%{_mandir}/man1}
 
-install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/irc
-gzip -9nf doc/BitchX.1.gz
-install doc/BitchX.1 $RPM_BUILD_ROOT%{_mandir}/man1
-rm -f doc/{bitchx.1.gz,BitchX{.1,-macros.tar.gz}}
+install source/{BitchX,scr-bx,wserv} \
+			$RPM_BUILD_ROOT%{_bindir}
 
-install source/BitchX $RPM_BUILD_ROOT%{_bindir}
-install source/wserv $RPM_BUILD_ROOT%{_bindir}/wserv-bx
-install source/scr-bx $RPM_BUILD_ROOT%{_bindir}
+install doc/BitchX.png	$RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
 
-install BitchX.help $RPM_BUILD_ROOT%{_datadir}/BitchX
+install BitchX.{ircnames,quit,reasons,help} \
+			$RPM_BUILD_ROOT%{_datadir}/BitchX
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Network/IRC
-install doc/BitchX.png $RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
+install script/{bxtcl.tcl,example-.bitchxrc,file.tcl,fserve+vfs.tar.gz,menu.bx,query.bx} \
+			$RPM_BUILD_ROOT%{_datadir}/BitchX/script
 
-install %{SOURCE4} $RPM_BUILD_ROOT%{_datadir}/BitchX/script/bxglobal
-cp -a bitchx-docs/* $RPM_BUILD_ROOT%{_datadir}/BitchX/help
-cp -a translation $RPM_BUILD_ROOT%{_datadir}/BitchX
-rm -rf $RPM_BUILD_ROOT%{_datadir}/BitchX/help/CVS
+install %{SOURCE2} 	$RPM_BUILD_ROOT%{_sysconfdir}/irc/ircII.servers
+install %{SOURCE3} 	$RPM_BUILD_ROOT%{_applnkdir}/Network/IRC/BitchX.desktop
+install %{SOURCE4} 	$RPM_BUILD_ROOT%{_datadir}/BitchX/script/bxglobal
 
-gzip -9nf doc/{functions,README.hooks,BitchX{-format,.faq,.doc,.bot}} \
-	BitchX.quit BitchX.reasons \
-	$RPM_BUILD_ROOT%{_mandir}/man1/*
+install translation/*	$RPM_BUILD_ROOT%{_datadir}/BitchX/translation
+
+cp -pr bitchx-docs/[1-9]* bitchx-docs/{commands,functions,out,README_FIRST} \
+			$RPM_BUILD_ROOT%{_datadir}/BitchX/help
+
+install dll/*.so	$RPM_BUILD_ROOT%{_libdir}/BitchX
+
+install doc/BitchX.1	$RPM_BUILD_ROOT%{_mandir}/man1
+
+gzip -9nf doc/BitchX{-format,-idea,.bot,.doc,.faq,.tcl} IPv6-support 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/*.gz BitchX* 
+%doc doc/*.gz *.gz 
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/BitchX
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/irc/*
 %{_datadir}/BitchX
 %{_applnkdir}/Network/IRC/*
