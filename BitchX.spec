@@ -43,15 +43,15 @@ make all
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/usr/{bin,lib/BitchX/{script,translation,help}}
-install -d $RPM_BUILD_ROOT/{usr/man/man1,etc/irc}
+install -d $RPM_BUILD_ROOT/{%{_mandir}/man1,etc/irc}
 
 strip source/BitchX
 strip source/wserv
 strip source/scr-bx
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/irc
-install %{SOURCE3} $RPM_BUILD_ROOT/usr/man/man1
-echo .so bitchx.1 > $RPM_BUILD_ROOT/usr/man/man1/BitchX.1
+install %{SOURCE3} $RPM_BUILD_ROOT%{_mandir}/man1
+echo .so bitchx.1 > $RPM_BUILD_ROOT%{_mandir}/man1/BitchX.1
 
 install source/BitchX $RPM_BUILD_ROOT/usr/bin
 install source/wserv $RPM_BUILD_ROOT/usr/bin/wserv-bx
@@ -62,7 +62,7 @@ install BitchX.help $RPM_BUILD_ROOT/usr/lib/BitchX
 cp -r help $RPM_BUILD_ROOT/usr/lib/BitchX
 
 gzip -9nf Changes doc/* BitchX.quit BitchX.reasons \
-	$RPM_BUILD_ROOT/usr/man/man1/*
+	$RPM_BUILD_ROOT%{_mandir}/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -76,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/BitchX
 
 %config(noreplace) %verify(not md5 size mtime) /etc/irc/*
-/usr/man/man1/*
+%{_mandir}/man1/*
 
 %changelog
 * Thu Oct 01 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
