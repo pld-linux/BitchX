@@ -58,8 +58,8 @@ install source/wserv $RPM_BUILD_ROOT/usr/bin/wserv-bx
 install source/scr-bx $RPM_BUILD_ROOT/usr/bin
 install install-bitchx $RPM_BUILD_ROOT/usr/bin
 
-install BitchX.help $RPM_BUILD_ROOT/usr/lib/BitchX
-cp -r help $RPM_BUILD_ROOT/usr/lib/BitchX
+install BitchX.help $RPM_BUILD_ROOT%{_libdir}/BitchX
+cp -r help $RPM_BUILD_ROOT%{_libdir}/BitchX
 
 gzip -9nf Changes doc/* BitchX.quit BitchX.reasons \
 	$RPM_BUILD_ROOT%{_mandir}/man1/*
@@ -73,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) /usr/bin/*
 
-/usr/lib/BitchX
+%{_libdir}/BitchX
 
 %config(noreplace) %verify(not md5 size mtime) /etc/irc/*
 %{_mandir}/man1/*
