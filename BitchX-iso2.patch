@@ -1,0 +1,15 @@
+diff -ru BitchX/source/irc.c BitchX.AX/source/irc.c
+--- BitchX/source/irc.c	Mon Jan 17 04:04:20 2000
++++ BitchX.AX/source/irc.c	Wed Feb  2 17:08:45 2000
+@@ -97,11 +97,7 @@
+ 						 * switchs are set */
+ 	dead	   = 0, 
+ 	inhibit_logging = 0,
+-#ifndef ONLY_STD_CHARS
+ 	startup_ansi = 1,			/* display startup ansi */
+-#else
+-	startup_ansi = 0,			/* DO NOT display startup ansi */
+-#endif
+ 	auto_connect = 1,			/* auto-connect to first server*/
+ 
+ 	background = 0,
