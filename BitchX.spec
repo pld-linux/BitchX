@@ -41,7 +41,7 @@ cp -f %{SOURCE1} include/config.h
 
 autoconf
 
-CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g} -D_GNU_SOURCE -w -I%{_includedir}/ncurses"
+CFLAGS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS} -D_GNU_SOURCE -w -I%{_includedir}/ncurses"
 %configure \
 	--enable-ipv6 \
 	--with-plugins=abot,acro,aim,amp,arcfour,blowfish,cavlink,cdrom,encrypt,fserv,hint,mail,nap,nicklist,possum,qbx,qmail,wavplay \
