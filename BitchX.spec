@@ -1,16 +1,20 @@
-Summary:     Improved color IRC client with built-in scripts
-Summary(pl): Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
-Name:        BitchX
-Version:     75p1
-Release:     3
-Copyright:   GPL
-Group:       Applications/Communications
-Group(pl):   Aplikacje/Komunikacja
-Source0:     ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
-Source1:     ftp://ftp.acronet.net/pub/ircii/epic3.004-help.tar.gz
-Source2:     %{name}.wmconfig
-Patch:       %{name}.patch
-BuildRoot:   /tmp/%{name}-%{version}-root
+Summary:	Improved color IRC client with built-in scripts
+Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
+Name:		BitchX
+Version:	75
+Release:	5d
+########	ftp://ftp.bitchx.com/pub/BitchX/source/
+Source0:	ircii-pana-%{version}.tar.gz
+Source1:	ircII.servers
+Source2:	ftp://ftp.acronet.net/pub/ircii/epic3.004-help.tar.gz
+Source3:	bitchx.1
+Copyright:	GPL
+Group:		Applications/Communications
+Group(pl):	Aplikacje/Komunikacja
+Patch0:		%{name}-%{version}.patch
+Patch1:		%{name}.pld.diff
+Patch2:		%{name}-%{version}.iso2.patch
+BuildRoot:	/tmp/%{name}-%{version}-root
  
 %description 
 BitchX is a popular ANSI color ircII client by panasync. It
@@ -19,71 +23,79 @@ script. It's interface is more colorful and cleaner than ircII.
 
 %description -l pl 
 BitchX jest popularnym klientem ircII. Jego interfejs jest bardziej 
-kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
+kolorowy i przej¿ysty ni¿ interfejs standardowego kilienta ircII.
 
 %prep
 %setup -q -n %{name}
-%setup -q -a 1 -n %{name}
-%patch -p1
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
+gzip -dc %{SOURCE2} | tar -xf -
+
+CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w" LDFLAGS=-s \
+    ./configure \
 	--prefix=/usr
-make all
+make all 
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/{bin,lib/BitchX/{script,translation,help}} \
-	$RPM_BUILD_ROOT/etc/{X11/wmconfig,irc}
 
-install $RPM_SOURCE_DIR/ircII.servers $RPM_BUILD_ROOT/etc/irc
-install -s source/BitchX $RPM_BUILD_ROOT/usr/bin
-install -s source/wserv $RPM_BUILD_ROOT/usr/bin/wserv-bx
-install -s source/scr-bx $RPM_BUILD_ROOT/usr/bin
+install -d $RPM_BUILD_ROOT/usr/{bin,lib/BitchX/{script,translation,help}}
+install -d $RPM_BUILD_ROOT/{usr/man/man1,etc/irc}
+
+strip source/BitchX
+strip source/wserv
+strip source/scr-bx
+
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/irc
+install %{SOURCE3} $RPM_BUILD_ROOT/usr/man/man1
+echo .so bitchx.1 > $RPM_BUILD_ROOT/usr/man/man1/BitchX.1
+
+install source/BitchX $RPM_BUILD_ROOT/usr/bin
+install source/wserv $RPM_BUILD_ROOT/usr/bin/wserv-bx
+install source/scr-bx $RPM_BUILD_ROOT/usr/bin
 install install-bitchx $RPM_BUILD_ROOT/usr/bin
+
 install BitchX.help $RPM_BUILD_ROOT/usr/lib/BitchX
 cp -r help $RPM_BUILD_ROOT/usr/lib/BitchX
 
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/wmconfig/BitchX
+bzip2 -9 Changes  doc/* BitchX.quit BitchX.reasons
+gzip -9fn $RPM_BUILD_ROOT/usr/man/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755) 
-%doc Changes  doc/* BitchX.quit BitchX.reasons
-%config(noreplace) %verify(not md5 size mtime) /etc/irc/*
-%config(missingok) /etc/X11/wmconfig/BitchX
+%defattr(644,root,root,755) 
+%doc Changes.bz2  doc/* BitchX* 
 
-%attr(755, root, root) /usr/bin/*
-%attr(644, root, root) /usr/lib/BitchX
+%attr(755,root,root) /usr/bin/*
+
+/usr/lib/BitchX
+
+%config(noreplace) %verify(not md5 size mtime) /etc/irc/*
+%attr(644,root, man) /usr/man/man1/*
 
 %changelog
-* Tue Feb  9 1999 Micha³ Kuratczyk <kurkens@polbox.com>
-  [75-3]
-- sloted BuildRoot into PLD standard
-- added %config(missingok) for wmconfig file
-- cosmetic changes
-
-* Thu Oct 13 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [75-2]
-- removed /etc/ircII.servers,
-- added wmconfig file,
-- added second %setup for unpacking second Source,
-- fixed: removed %attr(644, root, root) from /usr/lib/BitchX.
-
 * Thu Oct 01 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
 - wserv is now as wserv-bx (modifiet to avoid conflicts with others
-  irc clients),
+  irc clients)
 - irclib is now ${prefix}/lib/BitchX
-- added /usr/lib/BitchX with subdirectories,
-- added Group(pl),
-- added configuration /etc/irc/ircII.servers,
-- added help (from EPIC3 but should be from EPIC4!),
-- now BitchX uses /usr/lib/BitchX/BitchX.help instead ~/.BitchX/BitchX.help.
+- added /usr/lib/BitchX with subdirectories
+- modified pl translations
+- added configuration /etc/irc/ircII.servers
+- added help (from EPIC3 but should be from EPIC4!)
+- added pl message in %post
+- now BitchX uses /usr/lib/BitchX/BitchX.help instead ~/.BitchX/BitchX.help
+- added Polish IRCNet servers to DEFAULT
 
 * Thu Aug 13 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-- added pl translation.
+- build against glibc-2.1,
+- translation modified for pl,
+- changed build root to /tmp/bitchx (oj Andrzej, Andrzej... fonetyka ;)
+- changed permissions of ELF binaries to 711.
 
 * Thu Jul 02 1998 Rod Cordova <rcordova@ethernet.org>
 - Applied the dcc.c fix to the source code
