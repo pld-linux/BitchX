@@ -50,10 +50,10 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_datadir}/BitchX/{script,translation,help} \
 $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}/irc} \
-	$RPM_BUILD_ROOT{%{_applnkdir}/Networking/IRC,%{_prefix}/X11R6/share/pixmaps}
+	$RPM_BUILD_ROOT{%{_applnkdir}/Network/IRC,%{_prefix}/X11R6/share/pixmaps}
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/irc
-gzip -9nf doc/BitchX.1.gz
+gzip -d doc/BitchX.1.gz
 install doc/BitchX.1 $RPM_BUILD_ROOT%{_mandir}/man1
 rm -f doc/{bitchx.1.gz,BitchX{.1,-macros.tar.gz}}
 
@@ -63,7 +63,7 @@ install source/scr-bx $RPM_BUILD_ROOT%{_bindir}
 
 install BitchX.help $RPM_BUILD_ROOT%{_datadir}/BitchX
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Networking/IRC
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Network/IRC
 install doc/BitchX.png $RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
 
 cp -a bitchx-docs/* $RPM_BUILD_ROOT%{_datadir}/BitchX/help
@@ -83,6 +83,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/irc/*
 %{_datadir}/BitchX
-%{_applnkdir}/Networking/IRC/*
+%{_applnkdir}/Network/IRC/*
 %{_prefix}/X11R6/share/pixmaps/*
 %{_mandir}/man1/*
