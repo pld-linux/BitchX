@@ -3,12 +3,13 @@ Summary(es):	Cliente IRC para la consola Linux
 Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Summary(pt_BR):	Cliente IRC para o console do Linux
 Name:		BitchX
-Version:	2
-Release:	3
+Version:	1.1
+Release:	1
+Epoch:		1
 %define	pre	-final
 License:	GPL
 Group:		Applications/Networking
-Source0:	ftp://ftp.bitchx.org/pub/BitchX/source/ircii-pana-%{version}%{pre}.tar.gz
+Source0:	http://www.bitchx.org/files/source/ircii-pana-%{version}%{pre}.tar.gz
 # Source0-md5:	611d2dda222f00c10140236f4c331572
 Source1:	ircII.servers
 Source2:	%{name}.desktop
