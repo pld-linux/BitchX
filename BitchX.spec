@@ -3,7 +3,6 @@ Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Name:		BitchX
 Version:	75
 Release:	5d
-########	ftp://ftp.bitchx.com/pub/BitchX/source/
 Source0:	ircii-pana-%{version}.tar.gz
 Source1:	ircII.servers
 Source2:	ftp://ftp.acronet.net/pub/ircii/epic3.004-help.tar.gz
@@ -14,6 +13,7 @@ Group(pl):	Aplikacje/Komunikacja
 Patch0:		%{name}-%{version}.patch
 Patch1:		%{name}.pld.diff
 Patch2:		%{name}-%{version}.iso2.patch
+URL:            ftp://ftp.bitchx.com/pub/BitchX/source/
 BuildRoot:	/tmp/%{name}-%{version}-root
  
 %description 
@@ -34,8 +34,8 @@ kolorowy i przej¿ysty ni¿ interfejs standardowego kilienta ircII.
 %build
 gzip -dc %{SOURCE2} | tar -xf -
 
-CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w" LDFLAGS=-s \
-    ./configure \
+CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w" LDFLAGS="-s" \
+./configure \
 	--prefix=/usr
 make all 
 
@@ -61,22 +61,22 @@ install install-bitchx $RPM_BUILD_ROOT/usr/bin
 install BitchX.help $RPM_BUILD_ROOT/usr/lib/BitchX
 cp -r help $RPM_BUILD_ROOT/usr/lib/BitchX
 
-bzip2 -9 Changes  doc/* BitchX.quit BitchX.reasons
-gzip -9fn $RPM_BUILD_ROOT/usr/man/man1/*
+gzip -9nf Changes doc/* BitchX.quit BitchX.reasons \
+	$RPM_BUILD_ROOT/usr/man/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755) 
-%doc Changes.bz2  doc/* BitchX* 
+%doc Changes.gz doc/* BitchX* 
 
 %attr(755,root,root) /usr/bin/*
 
 /usr/lib/BitchX
 
 %config(noreplace) %verify(not md5 size mtime) /etc/irc/*
-%attr(644,root, man) /usr/man/man1/*
+/usr/man/man1/*
 
 %changelog
 * Thu Oct 01 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
