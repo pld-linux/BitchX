@@ -3,26 +3,24 @@ Summary(es):	Cliente IRC para la consola Linux
 Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Summary(pt_BR):	Cliente IRC para o console do Linux
 Name:		BitchX
-Version:	1.0c19
-Release:	10
+Version:	1.1
+Release:	1
+%define	pre	-final
 License:	GPL
 Group:		Applications/Networking
-Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
-# Source0-md5:	79431ff0880e7317049045981fac8adc
+Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}%{pre}.tar.gz
+# Source0-md5:	611d2dda222f00c10140236f4c331572
 Source1:	ircII.servers
 Source2:	%{name}.desktop
 Source3:	%{name}-bxglobal.script
 Source4:	%{name}.1.pl
 Patch0:		%{name}-config.h.patch
 Patch1:		%{name}-numver.patch
-Patch2:		%{name}-dcc-force-port.patch
-Patch3:		%{name}-doc.patch
-Patch4:		%{name}-emacs.patch
-Patch5:		%{name}-versioned-tcl.patch
-Patch6:		%{name}-353fix.patch
-Patch7:		%{name}-security.patch
-Patch8:		%{name}-names.patch
-Patch9:		%{name}-gcc33.patch
+Patch2:		%{name}-doc.patch
+Patch3:		%{name}-emacs.patch
+Patch4:		%{name}-versioned-tcl.patch
+Patch5:		%{name}-353fix.patch
+Patch6:		%{name}-security.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.com/
 BuildRequires:	mysql-devel
@@ -74,9 +72,6 @@ powtarzaj± siê te same pytania.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
 
 %build
 CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
@@ -103,7 +98,7 @@ install script/*	$RPM_BUILD_ROOT%{_datadir}/%{name}/script
 install translation/*	$RPM_BUILD_ROOT%{_datadir}/%{name}/translation
 cp -pfr bitchx-docs/*	$RPM_BUILD_ROOT%{_datadir}/%{name}/help
 
-install doc/BitchX.png	$RPM_BUILD_ROOT%{_pixmapsdir}
+install doc/BitchX.xpm	$RPM_BUILD_ROOT%{_pixmapsdir}
 
 install doc/BitchX.1	$RPM_BUILD_ROOT%{_mandir}/man1
 
@@ -118,7 +113,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc Changelog doc/BitchX{-format,-idea,.bot,.doc,.faq,.tcl} IPv6-support dll/europa/{README,knowledgebase.sql}
+%doc Changelog doc/BitchX{.doc,.faq} doc/tcl/BitchX.tcl IPv6-support dll/europa/{README,knowledgebase.sql}
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/irc/*
 %dir %{_datadir}/BitchX
