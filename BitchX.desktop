@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=BitchX
+Comment=The Ultimate IRC Client
+Exec=xterm -e BitchX
+Icon=BitchX.png
+Terminal=0
+Type=Application
