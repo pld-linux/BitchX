@@ -4,7 +4,7 @@ Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Summary(pt_BR):	Cliente IRC para o console do Linux
 Name:		BitchX
 Version:	1.0c18
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/Networking
 Group(de):	Applikationen/Netzwerkwesen
@@ -15,6 +15,7 @@ Source2:	%{name}.desktop
 Source3:	%{name}-bxglobal.script
 Source4:	%{name}.1.pl
 Patch0:		%{name}-config.h.patch
+Patch1:		%{name}-numver.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.com/
 BuildRequires:	mysql-devel
@@ -62,6 +63,7 @@ powtarzaj± siê te same pytania.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p1
 
 %build
 CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"

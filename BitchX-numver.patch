@@ -1,0 +1,11 @@
+--- BitchX/source/modules.c~	Mon Jan  8 07:24:22 2001
++++ BitchX/source/modules.c	Sun Dec 23 22:10:44 2001
+@@ -65,7 +65,7 @@
+ 
+ Function_ptr global_table[NUMBER_OF_GLOBAL_FUNCTIONS] = { NULL };
+ extern int read_sockets();
+-extern unsigned long bitchx_numver;
++extern const unsigned long bitchx_numver;
+ extern int identd;
+ 
+ extern int (*dcc_open_func) (int, int, unsigned long, int);
