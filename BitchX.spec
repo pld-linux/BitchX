@@ -44,7 +44,7 @@ autoconf
 CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g} -D_GNU_SOURCE -w -I%{_includedir}/ncurses"
 %configure \
 	--enable-ipv6 \
-	--with-plugins \
+	--with-plugins=abot,acro,aim,amp,arcfour,blowfish,cavlink,cdrom,encrypt,fserv,hint,mail,nap,nicklist,possum,qbx,qmail,wavplay \
 	--with-plugindir=%{_libdir}/BitchX
 
 %{__make} INSTALL_WSERV=%{_bindir}/wserv-bx
