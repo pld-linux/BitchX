@@ -10,9 +10,12 @@ Source3:	bitchx.1
 Copyright:	GPL
 Group:		Applications/Communications
 Group(pl):	Aplikacje/Komunikacja
-Patch0:		%{name}-%{version}.patch
-Patch1:		%{name}.pld.diff
-Patch2:		%{name}-%{version}.iso2.patch
+Patch0:		%{name}-75.patch
+Patch1:		%{name}-pld.patch
+Patch2:		%{name}-75.iso2.patch
+Patch3:         %{name}-tcl.patch
+Patch4:         %{name}-script.patch
+Patch5:		BitchX-config.patch
 URL:            ftp://ftp.bitchx.com/pub/BitchX/source/
 BuildRoot:	/tmp/%{name}-%{version}-root
  
@@ -30,19 +33,22 @@ kolorowy i przej¿ysty ni¿ interfejs standardowego kilienta ircII.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p0
 
 %build
 gzip -dc %{SOURCE2} | tar -xf -
 
 CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w" LDFLAGS="-s" \
 ./configure %{_target_platform} \
-	--prefix=/usr
+	--prefix=%{_prefix}
 make all 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/usr/{bin,lib/BitchX/{script,translation,help}}
+install -d $RPM_BUILD_ROOT/usr/{bin,share/BitchX/{script,translation,help}}
 install -d $RPM_BUILD_ROOT/{%{_mandir}/man1,etc/irc}
 
 strip source/BitchX
@@ -58,11 +64,11 @@ install source/wserv $RPM_BUILD_ROOT%{_bindir}/wserv-bx
 install source/scr-bx $RPM_BUILD_ROOT%{_bindir}
 install install-bitchx $RPM_BUILD_ROOT%{_bindir}
 
-install BitchX.help $RPM_BUILD_ROOT%{_libdir}/BitchX
-cp -r help $RPM_BUILD_ROOT%{_libdir}/BitchX
+install BitchX.help $RPM_BUILD_ROOT%{_datadir}/BitchX
+cp -a help $RPM_BUILD_ROOT%{_datadir}/BitchX
 
 gzip -9nf Changes doc/* BitchX.quit BitchX.reasons \
-	$RPM_BUILD_ROOT%{_mandir}/man1/*
+	$RPM_BUILD_ROOT%{_mandir}/man1/* || :
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -73,7 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_bindir}/*
 
-%{_libdir}/BitchX
+%{_datadir}/BitchX
 
 %config(noreplace) %verify(not md5 size mtime) /etc/irc/*
 %{_mandir}/man1/*
