@@ -2,7 +2,7 @@ Summary:	Improved color IRC client with built-in scripts
 Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Name:		BitchX
 Version:	1.0c17
-Release:	5
+Release:	6
 License:	GPL
 Group:		Applications/Networking
 Group(de):	Applikationen/Netzwerkwesen
