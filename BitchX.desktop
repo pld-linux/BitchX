@@ -9,3 +9,5 @@ Exec=BitchX
 Icon=BitchX.png
 Terminal=true
 Type=Application
+Categories=ConsoleOnly;Network;IRCClient;
+# vi: encoding=utf-8
