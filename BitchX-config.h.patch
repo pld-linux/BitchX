@@ -5,8 +5,8 @@
   * List last updated: 03/24/01.  -dialtone.
   */
 -#define DEFAULT_SERVER  "[efnet] "\
-+#define DEFAULT_SERVER  "[PLD] "\
-+				"irc.pld.org.pl "\
++#define DEFAULT_SERVER  "[freenode] "\
++				"irc.freenode.net "\
 +			"[efnet] "\
  				"irc.Prison.NET "\
  				"irc.colorado.edu "\
