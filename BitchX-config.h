@@ -362,7 +362,7 @@
  * `#define IPV6 1'. For older libc and libinet6 run configure script
  * with `--enable-ipv6' parameter.
  */
-#undef IPV6
+#define IPV6 1
 
 #define DEFAULT_PING_TYPE 1
 
