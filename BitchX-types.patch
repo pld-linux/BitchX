@@ -1,0 +1,14 @@
+--- BitchX/include/module.h.orig	2003-04-11 03:09:07.000000000 +0200
++++ BitchX/include/module.h	2004-06-18 12:18:28.000000000 +0200
+@@ -15,7 +15,11 @@
+ 
+ #include "struct.h"
+ 
++#if defined(__alpha__) || defined(__x86_64__) || defined(__ia64__)
++typedef long (*Function_ptr)();
++#else
+ typedef int (*Function_ptr)();
++#endif
+ 
+ #ifdef WANT_DLL
+ #ifdef HPUX
