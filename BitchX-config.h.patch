@@ -1,12 +1,12 @@
---- BitchX/include/config.h.orig	Sun Mar 24 10:31:04 2002
-+++ BitchX/include/config.h	Mon May 13 03:05:00 2002
+--- BitchX/config.h.orig	2004-01-20 01:13:40.852966480 +0000
++++ BitchX/config.h	2004-01-20 01:12:44.216576520 +0000
 @@ -37,7 +37,9 @@
   *
   * List last updated: 03/24/01.  -dialtone.
   */
 -#define DEFAULT_SERVER  "[efnet] "\
-+#define DEFAULT_SERVER  "[freenode] "\
-+				"irc.freenode.net "\
++#define DEFAULT_SERVER	 "[pldnet"] "\
++				"irc.pld-linux.org "\
 +			"[efnet] "\
  				"irc.Prison.NET "\
  				"irc.colorado.edu "\
@@ -37,7 +37,7 @@
   * undefine this.
   */
 - #define DEFAULT_NETWORK "efnet"
-+ #define DEFAULT_NETWORK "PLD"
++ #define DEFAULT_NETWORK "pldnet"
  
  /*
   * Below are the IRCII variable defaults.  For boolean variables, use 1 for
