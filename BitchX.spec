@@ -35,9 +35,6 @@ BitchX is a popular ANSI color ircII client by panasync. It
 incorporates various features that would normally require a script.
 It's interface is more colorful and cleaner than ircII.
 
-%description -l es
-Cliente IRC para la consola Linux.
-
 %description -l pl
 BitchX jest popularnym klientem ircII. Jego interfejs jest bardziej
 kolorowy i przejrzysty ni¿ interfejs standardowego klienta ircII.
