@@ -4,7 +4,7 @@ Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Summary(pt_BR):	Cliente IRC para o console do Linux
 Name:		BitchX
 Version:	1.1
-Release:	1
+Release:	2
 %define	pre	-final
 License:	GPL
 Group:		Applications/Networking
@@ -21,16 +21,13 @@ Patch3:		%{name}-emacs.patch
 Patch4:		%{name}-versioned-tcl.patch
 Patch5:		%{name}-353fix.patch
 Patch6:		%{name}-security.patch
+Patch7:		%{name}-types.patch
+Patch8:		%{name}-pic.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.org/
 BuildRequires:	mysql-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-ExcludeArch:	alpha sparc64 ia64 ppc64 amd64
-
-%ifarch sparc ppc
-%define		no_install_post_strip 1
-%endif
 
 %define		_datadir	%{_libdir}
 
@@ -56,7 +53,7 @@ trabalhar que a do ircII :)
 Summary:	Europa Plugin
 Summary(pl):	Wtyczka Europa
 Group:		Applications/Networking
-Requires:	BitchX = %{version}
+Requires:	BitchX = %{version}-%{release}
 
 %description europa
 Europa is a BitchX plugin to provide easy access to an SQL
@@ -77,10 +74,17 @@ powtarzaj± siê te same pytania.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
+%patch8 -p1
+
+# kill any precompiled x86 binaries
+rm -f dll/europa/corba/ai-client dll/europa/cse476/p1 \
+	dll/nap/dragonap/napi/main dll/nap/test \
+	bitchx-docs/findcomm
 
 %build
 CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses -fno-strict-aliasing"
-%configure2_13 \
+%configure \
 	--enable-ipv6 \
 	--with-plugins=all
 
