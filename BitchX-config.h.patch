@@ -1,8 +1,19 @@
---- BitchX/include/config.h.orig	Mon Jan  8 07:24:22 2001
-+++ BitchX/include/config.h	Thu Aug 16 20:41:31 2001
-@@ -84,6 +84,11 @@
- 				"irc.homelien.no "\
- 				"irc.rt.ru "\
+--- BitchX/include/config.h.orig	Sun Mar 24 10:31:04 2002
++++ BitchX/include/config.h	Mon May 13 03:05:00 2002
+@@ -37,7 +37,9 @@
+  *
+  * List last updated: 03/24/01.  -dialtone.
+  */
+-#define DEFAULT_SERVER  "[efnet] "\
++#define DEFAULT_SERVER  "[PLD] "\
++				"irc.pld.org.pl "\
++			"[efnet] "\
+ 				"irc.Prison.NET "\
+ 				"irc.colorado.edu "\
+ 				"irc.concentric.net "\
+@@ -69,6 +71,11 @@
+ 				"efnet.mit.edu "\
+ 				"efnet.vuurwerk.nl "\
  			"[ircnet] "\
 +				"poznan.irc.pl" \
 +				"wroclaw.irc.pl" \
@@ -12,7 +23,7 @@
  				"irc.webbernet.net "\
  				"irc.stealth.net "\
  				"irc.funet.fi "\
-@@ -185,7 +190,7 @@
+@@ -181,7 +188,7 @@
  #if defined(WINNT) || defined(__EMX__)
  #define SERVERS_FILE "irc-serv"
  #else
@@ -21,16 +32,16 @@
  #endif
  
  /*
-@@ -199,7 +204,7 @@
+@@ -195,7 +202,7 @@
   * we define the default network type for server groups. Do not just
   * undefine this.
   */
 - #define DEFAULT_NETWORK "efnet"
-+ #define DEFAULT_NETWORK "ircnet"
++ #define DEFAULT_NETWORK "PLD"
  
  /*
   * Below are the IRCII variable defaults.  For boolean variables, use 1 for
-@@ -337,7 +342,7 @@
+@@ -333,7 +340,7 @@
   * define this to solve the problem.
   *
   */
