@@ -7,8 +7,6 @@ Version:	1.0c18
 Release:	5
 License:	GPL
 Group:		Applications/Networking
-Group(de):	Applikationen/Netzwerkwesen
-Group(pl):	Aplikacje/Sieciowe
 Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
 Source1:	ircII.servers
 Source2:	%{name}.desktop
@@ -46,8 +44,6 @@ trabalhar que a do ircII :)
 Summary:	Europa Plugin
 Summary(pl):	Wtyczka Europa
 Group:		Applications/Networking
-Group(de):	Applikationen/Netzwerkwesen
-Group(pl):	Aplikacje/Sieciowe
 Requires:	BitchX = %{version}
 
 %description europa
