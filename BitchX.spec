@@ -19,7 +19,7 @@ Patch3:		%{name}-doc.patch
 Patch4:		%{name}-emacs.patch
 Patch5:		%{name}-versioned-tcl.patch
 Patch6:		%{name}-353fix.patch
-Patch7:		%{name}-secuirty.patch
+Patch7:		%{name}-security.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.com/
 BuildRequires:	mysql-devel
