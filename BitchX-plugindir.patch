@@ -1,0 +1,21 @@
+diff -ruN BitchX.orig/source/Makefile.in BitchX/source/Makefile.in
+--- BitchX.orig/source/Makefile.in	Tue Aug 29 09:18:29 2000
++++ BitchX/source/Makefile.in	Sat Sep 16 21:01:33 2000
+@@ -10,6 +10,8 @@
+ srcdir = @srcdir@
+ VPATH = @srcdir@
+ 
++PLUGINDIR = @PLUGINDIR@
++
+ #topdir = @srcdir@
+ #incdir = @srcdir@/include
+ #objdir = @srcdir@
+@@ -62,7 +64,7 @@
+ 
+ modules.o: Makefile ../Makefile
+ 	$(CC) $(CFLAGS) $(DEFS) $(INCLUDES) \
+-	-DPLUGIN_DIR=\"$(IRCLIB)/plugins\" -DSHLIB_SUFFIX=\"$(SHLIB_SUFFIX)\" -c $(srcdir)/modules.c
++	-DPLUGIN_DIR=\"$(PLUGINDIR)\" -DSHLIB_SUFFIX=\"$(SHLIB_SUFFIX)\" -c $(srcdir)/modules.c
+ 
+ help.o: Makefile ../Makefile
+ 	$(CC) $(CFLAGS) $(DEFS) $(INCLUDES) \
