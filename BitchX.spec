@@ -14,6 +14,7 @@ Source3:	%{name}-bxglobal.script
 Patch0:		%{name}-config.h.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.com/
+BuildRequires:	mysql-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
