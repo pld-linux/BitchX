@@ -22,6 +22,7 @@ Patch5:		%{name}-versioned-tcl.patch
 Patch6:		%{name}-353fix.patch
 Patch7:		%{name}-security.patch
 Patch8:		%{name}-names.patch
+Patch9:		%{name}-gcc33.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.com/
 BuildRequires:	mysql-devel
@@ -75,6 +76,7 @@ powtarzaj± siê te same pytania.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
