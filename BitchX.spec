@@ -134,6 +134,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files europa
 %defattr(644,root,root,755)
-%doc dll/europa/*.gz
+%doc dll/europa/{README,CREDITS}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_datadir}/BitchX/plugins/europa.so
