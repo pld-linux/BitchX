@@ -8,6 +8,7 @@ Release:	4
 License:	GPL
 Group:		Applications/Networking
 Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
+# Source0-md5:	79431ff0880e7317049045981fac8adc
 Source1:	ircII.servers
 Source2:	%{name}.desktop
 Source3:	%{name}-bxglobal.script
