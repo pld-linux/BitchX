@@ -32,7 +32,7 @@ Cliente IRC para la consola Linux.
 
 %description -l pl
 BitchX jest popularnym klientem ircII. Jego interfejs jest bardziej
-kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
+kolorowy i przejrzysty ni¿ interfejs standardowego klienta ircII.
 
 %description -l pt_BR
 O BitchX é um cliente de IRC com suporte a cores para o console do
