@@ -1,0 +1,41 @@
+--- BitchX/include/config.h.orig	Mon Jan  8 07:24:22 2001
++++ BitchX/include/config.h	Thu Aug 16 20:41:31 2001
+@@ -84,6 +84,11 @@
+ 				"irc.homelien.no "\
+ 				"irc.rt.ru "\
+ 			"[ircnet] "\
++				"poznan.irc.pl" \
++				"wroclaw.irc.pl" \
++				"krakow.irc.pl" \
++				"lublin.irc.pl" \
++				"warszawa.irc.pl" \
+ 				"irc.webbernet.net "\
+ 				"irc.stealth.net "\
+ 				"irc.funet.fi "\
+@@ -185,7 +190,7 @@
+ #if defined(WINNT) || defined(__EMX__)
+ #define SERVERS_FILE "irc-serv"
+ #else
+-#define SERVERS_FILE "ircII.servers"
++#define SERVERS_FILE "/etc/irc/ircII.servers"
+ #endif
+ 
+ /*
+@@ -199,7 +204,7 @@
+  * we define the default network type for server groups. Do not just
+  * undefine this.
+  */
+- #define DEFAULT_NETWORK "efnet"
++ #define DEFAULT_NETWORK "ircnet"
+ 
+ /*
+  * Below are the IRCII variable defaults.  For boolean variables, use 1 for
+@@ -337,7 +342,7 @@
+  * define this to solve the problem.
+  *
+  */
+-#undef CHARSET_CUSTOM
++#define CHARSET_CUSTOM
+ 
+ /* 
+  * If you want the non-ansi BitchX logo only define this ASCII_LOGO
