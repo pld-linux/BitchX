@@ -94,14 +94,13 @@ install %{SOURCE2}	$RPM_BUILD_ROOT%{_applnkdir}/Network/Communications/BitchX.de
 install %{SOURCE3}	$RPM_BUILD_ROOT%{_datadir}/%{name}/script/bxglobal
 install %{SOURCE4}	$RPM_BUILD_ROOT%{_mandir}/pl/man1/BitchX.1
 
-gzip -9nf Changelog doc/BitchX{-format,-idea,.bot,.doc,.faq,.tcl} IPv6-support dll/europa/{README,knowledgebase.sql}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/*.gz *.gz Changelog.gz
+%doc Changelog doc/BitchX{-format,-idea,.bot,.doc,.faq,.tcl} IPv6-support dll/europa/{README,knowledgebase.sql}
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/irc/*
 %dir %{_datadir}/BitchX
