@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=BitchX
 Comment=The Ultimate IRC Client
+Comment[pl]=Ulepszony klient IRC
 Exec=xterm -e BitchX
 Icon=BitchX.png
 Terminal=0
