@@ -22,7 +22,7 @@ Patch4:		%{name}-versioned-tcl.patch
 Patch5:		%{name}-353fix.patch
 Patch6:		%{name}-security.patch
 Icon:		BitchX.xpm
-URL:		http://www.bitchx.com/
+URL:		http://www.bitchx.org/
 BuildRequires:	mysql-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -74,7 +74,7 @@ powtarzaj± siê te same pytania.
 %patch6 -p1
 
 %build
-CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
+CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses -fno-strict-aliasing"
 %configure2_13 \
 	--enable-ipv6 \
 	--with-plugins=all
