@@ -1,5 +1,7 @@
 Summary:	Improved color IRC client with built-in scripts
+Summary(es):	Cliente IRC para la consola Linux
 Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
+Summary(pt_BR):	Cliente IRC para o console do Linux
 Name:		BitchX
 Version:	1.0c18
 Release:	4
@@ -19,16 +21,25 @@ BuildRequires:	mysql-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_datadir %{_libdir}
+%define		_datadir	%{_libdir}
 
 %description
 BitchX is a popular ANSI color ircII client by panasync. It
 incorporates various features that would normally require a script.
 It's interface is more colorful and cleaner than ircII.
 
+%description -l es
+Cliente IRC para la consola Linux.
+
 %description -l pl
 BitchX jest popularnym klientem ircII. Jego interfejs jest bardziej
 kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
+
+%description -l pt_BR
+O BitchX é um cliente de IRC com suporte a cores para o console do
+Linux. Ele incorpora várias características que normalmente
+requereriam um script, e a sua interface é mais colorida, e simples de
+trabalhar que a do ircII :)
 
 %package europa
 Summary:	Europa Plugin
@@ -63,7 +74,6 @@ CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_pixmapsdir},%{_applnkdir}/Network/Communications} \
 	$RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_mandir}/{man1,pl/man1}} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/{script,translation,help,plugins}
@@ -72,8 +82,7 @@ install source/{BitchX,scr-bx} \
 			$RPM_BUILD_ROOT%{_bindir}
 install dll/*/*.so	$RPM_BUILD_ROOT%{_datadir}/%{name}/plugins
 
-install source/wserv \
-			$RPM_BUILD_ROOT%{_datadir}/%{name}
+install source/wserv	$RPM_BUILD_ROOT%{_datadir}/%{name}
 
 install script/*	$RPM_BUILD_ROOT%{_datadir}/%{name}/script
 install translation/*	$RPM_BUILD_ROOT%{_datadir}/%{name}/translation
