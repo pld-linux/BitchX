@@ -1,11 +1,11 @@
---- BitchX/source/modules.c~	Mon Jan  8 07:24:22 2001
-+++ BitchX/source/modules.c	Sun Dec 23 22:10:44 2001
-@@ -65,7 +65,7 @@
+--- BitchX/source/modules.c.orig	Thu Feb 13 15:16:18 2003
++++ BitchX/source/modules.c	Thu Feb 13 15:19:15 2003
+@@ -1321,7 +1321,7 @@
  
- Function_ptr global_table[NUMBER_OF_GLOBAL_FUNCTIONS] = { NULL };
- extern int read_sockets();
--extern unsigned long bitchx_numver;
-+extern const unsigned long bitchx_numver;
- extern int identd;
- 
- extern int (*dcc_open_func) (int, int, unsigned long, int);
+ int check_version(unsigned long required)
+ {
+-unsigned long major, minor, need_major, need_minor;
++unsigned const major, minor, need_major, need_minor;	
+ 	major = bitchx_numver / 10000;
+ 	minor = (bitchx_numver / 100) % 100;
+ 	need_major = required / 10000;

@@ -1,5 +1,5 @@
---- configure.in.orig   Wed Feb 12 23:41:53 2003
-+++ configure.in        Wed Feb 12 23:42:47 2003
+--- BitchX/configure.in.orig   Wed Feb 12 23:41:53 2003
++++ BitchX/configure.in        Wed Feb 12 23:42:47 2003
 @@ -575,7 +575,7 @@
                  	                	tcllib=`echo $tcllib | sed s@.a@@`
  	                	                tcllib=`echo $tcllib | sed s@libtcl@tcl@`

@@ -13,7 +13,7 @@ Source2:	%{name}.desktop
 Source3:	%{name}-bxglobal.script
 Source4:	%{name}.1.pl
 Patch0:		%{name}-config.h.patch
-#Patch1:		%{name}-numver.patch
+Patch1:		%{name}-numver.patch
 Patch2:		%{name}-dcc-force-port.patch
 Patch3:		%{name}-doc.patch
 Patch4:		%{name}-emacs.patch
@@ -63,11 +63,11 @@ powtarzaj± siê te same pytania.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
-#%patch1 -p1
+%patch1 -p1
 %patch2 -p1
-%patch3 -p0
+%patch3 -p1
 %patch4 -p1
-%patch5 -p0
+%patch5 -p1
 
 %build
 CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"

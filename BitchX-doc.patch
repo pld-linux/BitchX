@@ -1,5 +1,5 @@
---- configure.in.orig   Wed Feb 12 23:39:12 2003
-+++ configure.in        Wed Feb 12 23:39:37 2003
+--- BitchX/configure.in.orig   Wed Feb 12 23:39:12 2003
++++ BitchX/configure.in        Wed Feb 12 23:39:37 2003
 @@ -880,7 +880,7 @@
    IRCLIB="\${prefix}/BitchX"
    IRCPATH="\$(DEFAULT_CTOOLZ_DIR):\$(DEFAULT_CTOOLZ_DIR)/plugins:.:\$(PLUGINDIR):\$(INSTALL_SCRIPT):\$(IRCLIB)"

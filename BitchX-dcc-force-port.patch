@@ -1,3 +1,5 @@
+Patch to enable forcing of the local port bitchx uses for DCC.
+
 --- BitchX/include/vars.h.old	Sun Nov  4 17:18:23 2001
 +++ BitchX/include/vars.h	Sun Nov  4 17:20:30 2001
 @@ -89,6 +89,7 @@
@@ -31,14 +33,3 @@
  #ifdef DCC_CNCT_PEND
  		flags |= DCC_CNCT_PEND;
  #endif
-#--- BitchX/source/modules.c.old	Tue Feb 11 01:13:41 2003
-#+++ BitchX/source/modules.c	Tue Feb 11 01:13:58 2003
-#@@ -1321,7 +1321,7 @@
-#
-# int check_version(unsigned long required)
-# {
-#-unsigned const major, minor, need_major, need_minor;
-#+unsigned long major, minor, need_major, need_minor;
-# 	major = bitchx_numver / 10000;
-# 	minor = (bitchx_numver / 100) % 100;
-# 	need_major = required / 10000;
