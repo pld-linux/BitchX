@@ -16,10 +16,8 @@ Patch2:		BitchX-iso2.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.com/
 BuildRequires:	ncurses-devel >= 5.0
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_applnkdir	/usr/X11R6/share/applnk
- 
 %description 
 BitchX is a popular ANSI color ircII client by panasync. It incorporates
 various features that would normally require a script. It's interface is
