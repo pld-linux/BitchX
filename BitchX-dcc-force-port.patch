@@ -1,0 +1,44 @@
+--- BitchX/include/vars.h.old	Sun Nov  4 17:18:23 2001
++++ BitchX/include/vars.h	Sun Nov  4 17:20:30 2001
+@@ -89,6 +89,7 @@
+ 	DCC_BLOCK_SIZE_VAR,
+ 	DCC_DLDIR_VAR , 
+ 	DCC_FAST_VAR, 
++	DCC_FORCE_PORT_VAR,
+ 	DCC_GET_LIMIT_VAR,
+ 	DCC_MAX_AUTOGET_SIZE_VAR ,
+ 	DCC_QUEUE_LIMIT_VAR,
+--- BitchX/source/vars.c.old	Sun Nov  4 17:16:10 2001
++++ BitchX/source/vars.c	Sun Nov  4 17:15:55 2001
+@@ -189,6 +189,7 @@
+ 	{ "DCC_BLOCK_SIZE",0,		INT_TYPE_VAR,	DEFAULT_DCC_BLOCK_SIZE, NULL, NULL, 0, VIF_BITCHX },
+ 	{ "DCC_DLDIR",0,		STR_TYPE_VAR,	0, NULL, NULL, 0, VIF_BITCHX },
+ 	{ "DCC_FAST",0,			BOOL_TYPE_VAR,	DEFAULT_DCC_FAST, NULL, NULL, 0, VIF_BITCHX },
++	{ "DCC_FORCE_PORT",0,		INT_TYPE_VAR,	0, NULL, NULL, 0, VIF_BITCHX },
+ 	{ "DCC_GET_LIMIT",0,		INT_TYPE_VAR,	DEFAULT_DCC_GET_LIMIT, NULL, NULL, 0, VIF_BITCHX },
+ 	{ "DCC_MAX_AUTOGET_SIZE",0,	INT_TYPE_VAR,	DEFAULT_MAX_AUTOGET_SIZE, NULL, NULL, 0, VIF_BITCHX },
+ 	{ "DCC_QUEUE_LIMIT",0,		INT_TYPE_VAR,	DEFAULT_DCC_QUEUE_LIMIT, NULL, NULL, 0, VIF_BITCHX },
+--- BitchX/source/dcc.c.old	Sun Nov  4 17:16:25 2001
++++ BitchX/source/dcc.c	Sun Nov  4 17:18:00 2001
+@@ -620,7 +620,9 @@
+ 
+ 		if (get_int_var(RANDOM_LOCAL_PORTS_VAR))
+ 			portnum = random_number(65535 - 1024) + 1024;
+-
++		if (get_int_var(DCC_FORCE_PORT_VAR))
++			portnum = get_int_var(DCC_FORCE_PORT_VAR);
++
+ #ifdef DCC_CNCT_PEND
+ 		flags |= DCC_CNCT_PEND;
+ #endif
+#--- BitchX/source/modules.c.old	Tue Feb 11 01:13:41 2003
+#+++ BitchX/source/modules.c	Tue Feb 11 01:13:58 2003
+#@@ -1321,7 +1321,7 @@
+#
+# int check_version(unsigned long required)
+# {
+#-unsigned const major, minor, need_major, need_minor;
+#+unsigned long major, minor, need_major, need_minor;
+# 	major = bitchx_numver / 10000;
+# 	minor = (bitchx_numver / 100) % 100;
+# 	need_major = required / 10000;

@@ -1,0 +1,11 @@
+--- configure.in.orig   Wed Feb 12 23:39:12 2003
++++ configure.in        Wed Feb 12 23:39:37 2003
+@@ -880,7 +880,7 @@
+   IRCLIB="\${prefix}/BitchX"
+   IRCPATH="\$(DEFAULT_CTOOLZ_DIR):\$(DEFAULT_CTOOLZ_DIR)/plugins:.:\$(PLUGINDIR):\$(INSTALL_SCRIPT):\$(IRCLIB)"
+   TRANSLATION_PATH="\$(IRCLIB)/translation"
+-  HELPDIR="\$(IRCLIB)/help"
++  HELPDIR="\${datadir}/doc/BitchX"
+   INSTALL_WSERV="\$(IRCLIB)/wserv\$(EXEEXT)"
+   INSTALL_SCRBX="\$(IRCLIB)/scr-bx\$(EXEEXT)"
+   INSTALL_SCRIPT="\$(IRCLIB)/script"

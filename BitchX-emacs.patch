@@ -1,0 +1,23 @@
+--- BitchX/source/keys.c.orig   Sun Mar 24 10:31:07 2002
++++ BitchX/source/keys.c        Wed Feb 12 23:49:13 2003
+@@ -1319,17 +1319,17 @@
+ 	snew_key(0,  1, "BEGINNING_OF_LINE");		/* ^A */
+ 	snew_key(0,  2, "BOLD");			/* ^B */
+ 	snew_key(0,  4, "DELETE_CHARACTER");		/* ^D */
+-	snew_key(0,  5, "CHANGE_TO_SPLIT");		/* ^E */
++	snew_key(0,  5, "END_OF_LINE");			/* ^E */
+ 	snew_key(0,  6, "WHOLEFT");			/* ^F */
+ 	snew_key(0,  8, "BACKSPACE");			/* ^H (delete) */
+ 
+ 	snew_key(0,  9, "TAB_COMPLETION");		/* ^I (tab) */
+ 	snew_key(0, 10, "SEND_LINE");			/* ^J (enter) */
+-	snew_key(0, 11, "JOIN_LAST_INVITE");		/* ^K */
++	snew_key(0, 11, "ERASE_TO_END_OF_LINE");	/* ^K */
+ 	snew_key(0, 12, "REFRESH_SCREEN");		/* ^L (linefeed) */
+ 	snew_key(0, 13, "SEND_LINE");			/* ^M (return) */
+ 	snew_key(0, 14, "QUOTE_CHARACTER");		/* ^N */
+-	snew_key(0, 15, "IGNORE_NICK");			/* ^O */
++	snew_key(0, 15, "NEXT_WINDOW");			/* ^O */
+ 	snew_key(0, 16, "BACKWARD_HISTORY");		/* ^P */
+
+ 	snew_key(0, 17, "QUOTE_CHARACTER");		/* ^Q */
