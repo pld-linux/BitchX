@@ -1,22 +1,19 @@
 Summary:	Improved color IRC client with built-in scripts
 Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Name:		BitchX
-Version:	75p3
+Version:	1.0c15
 Release:	1
-Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
-Source1:	ircII.servers
-Source2:	ftp://ftp.acronet.net/pub/ircii/epic3.004-help.tar.gz
-Source3:	bitchx.1
+Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/%{name}-%{version}.tar.gz
+Source1:	BitchX.config.h
+Source2:	ircII.servers
 Copyright:	GPL
 Group:		Applications/Networking
 Group(pl):	Aplikacje/Sieciowe
-Patch0:		%{name}-75.patch
+Patch0:		%{name}-configure.patch
 Patch1:		%{name}-pld.patch
-Patch2:		%{name}-75.iso2.patch
-Patch3:         %{name}-tcl.patch
-Patch4:         %{name}-script.patch
-Patch5:		BitchX-config.patch
-URL:            ftp://ftp.bitchx.com/pub/BitchX/source/
+Patch2:		%{name}-iso2.patch
+Patch3:         %{name}-antiroot.patch
+URL:		http://www.bitchx.com/
 BuildRoot:	/tmp/%{name}-%{version}-root
  
 %description 
@@ -34,15 +31,17 @@ kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p0
 
 %build
-gzip -dc %{SOURCE2} | tar -xf -
+#gzip -dc %{SOURCE2} | tar -xf -
 
-CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w" LDFLAGS="-s" \
-./configure %{_target_platform} \
-	--prefix=%{_prefix}
+cp -f %{SOURCE1} source/config.h
+
+autoconf
+
+CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE -w -I/usr/include/ncurses" LDFLAGS="-s" \
+%configure
+
 make all 
 
 %install
@@ -55,31 +54,37 @@ strip source/BitchX
 strip source/wserv
 strip source/scr-bx
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/irc
-install %{SOURCE3} $RPM_BUILD_ROOT%{_mandir}/man1
-echo .so bitchx.1 > $RPM_BUILD_ROOT%{_mandir}/man1/BitchX.1
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/irc
+install doc/BitchX.1.gz $RPM_BUILD_ROOT%{_mandir}/man1
 
 install source/BitchX $RPM_BUILD_ROOT%{_bindir}
 install source/wserv $RPM_BUILD_ROOT%{_bindir}/wserv-bx
 install source/scr-bx $RPM_BUILD_ROOT%{_bindir}
-install install-bitchx $RPM_BUILD_ROOT%{_bindir}
+#install install-bitchx $RPM_BUILD_ROOT%{_bindir}
 
 install BitchX.help $RPM_BUILD_ROOT%{_datadir}/BitchX
-cp -a help $RPM_BUILD_ROOT%{_datadir}/BitchX
 
-gzip -9nf Changes doc/* BitchX.quit BitchX.reasons \
-	$RPM_BUILD_ROOT%{_mandir}/man1/* || :
+cp -a bitchx-docs/* $RPM_BUILD_ROOT%{_datadir}/BitchX/help
+cp -a translation $RPM_BUILD_ROOT%{_datadir}/BitchX
+rm -rf $RPM_BUILD_ROOT%{_datadir}/BitchX/help/CVS
+
+gzip -9nf  doc/* BitchX.quit BitchX.reasons || :
+#\
+	#$RPM_BUILD_ROOT%{_mandir}/man1/* || :
+
+#changes
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755) 
-%doc Changes.gz doc/* BitchX* 
+#changes.gz
+%doc doc/* BitchX* 
 
 %attr(755,root,root) %{_bindir}/*
 
 %{_datadir}/BitchX
 
-%config(noreplace) %verify(not md5 size mtime) /etc/irc/*
-%{_mandir}/man1/*
+#%config(noreplace) %verify(not md5 size mtime) /etc/irc/*
+#%{_mandir}/man1/*
