@@ -1,9 +1,9 @@
 Summary:	Improved color IRC client with built-in scripts
 Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Name:		BitchX
-Version:	75
-Release:	5d
-Source0:	ircii-pana-%{version}.tar.gz
+Version:	75p3
+Release:	1
+Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
 Source1:	ircII.servers
 Source2:	ftp://ftp.acronet.net/pub/ircii/epic3.004-help.tar.gz
 Source3:	bitchx.1
