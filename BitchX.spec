@@ -19,9 +19,9 @@ BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description 
-BitchX is a popular ANSI color ircII client by panasync. It incorporates
-various features that would normally require a script. It's interface is
-more colorful and cleaner than ircII.
+BitchX is a popular ANSI color ircII client by panasync. It
+incorporates various features that would normally require a script.
+It's interface is more colorful and cleaner than ircII.
 
 %description -l pl 
 BitchX jest popularnym klientem ircII. Jego interfejs jest bardziej
@@ -49,11 +49,11 @@ make all
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_datadir}/BitchX/{script,translation,help} \
-	$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,/etc/irc} \
-	$RPM_BUILD_ROOT{%{_applnkdir}/Networking/IRC,/usr/X11R6/share/pixmaps}
+$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}/irc} \
+	$RPM_BUILD_ROOT{%{_applnkdir}/Networking/IRC,%{_prefix}/X11R6/share/pixmaps}
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/irc
-gzip -d doc/BitchX.1.gz
+gzip -9nf doc/BitchX.1.gz
 install doc/BitchX.1 $RPM_BUILD_ROOT%{_mandir}/man1
 rm -f doc/{bitchx.1.gz,BitchX{.1,-macros.tar.gz}}
 
@@ -64,7 +64,7 @@ install source/scr-bx $RPM_BUILD_ROOT%{_bindir}
 install BitchX.help $RPM_BUILD_ROOT%{_datadir}/BitchX
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Networking/IRC
-install doc/BitchX.png $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+install doc/BitchX.png $RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
 
 cp -a bitchx-docs/* $RPM_BUILD_ROOT%{_datadir}/BitchX/help
 cp -a translation $RPM_BUILD_ROOT%{_datadir}/BitchX
@@ -84,5 +84,5 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/irc/*
 %{_datadir}/BitchX
 %{_applnkdir}/Networking/IRC/*
-/usr/X11R6/share/pixmaps/*
+%{_prefix}/X11R6/share/pixmaps/*
 %{_mandir}/man1/*
