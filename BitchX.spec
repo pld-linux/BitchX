@@ -2,7 +2,7 @@ Summary:	Improved color IRC client with built-in scripts
 Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Name:		BitchX
 Version:	1.0c18
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Networking
 Group(de):	Applikationen/Netzwerkwesen
@@ -11,6 +11,7 @@ Source0:	ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
 Source1:	ircII.servers
 Source2:	%{name}.desktop
 Source3:	%{name}-bxglobal.script
+Source4:	%{name}.1.pl
 Patch0:		%{name}-config.h.patch
 Icon:		BitchX.xpm
 URL:		http://www.bitchx.com/
@@ -63,7 +64,9 @@ CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_pixmapsdir},%{_applnkdir}/Network/Communications,%{_sysconfdir}/irc,%{_mandir}/man1,%{_datadir}/%{name}/{script,translation,help,plugins}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_pixmapsdir},%{_applnkdir}/Network/Communications} \
+	$RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_mandir}/{man1,pl/man1}} \
+	$RPM_BUILD_ROOT%{_datadir}/%{name}/{script,translation,help,plugins}
 
 install source/{BitchX,scr-bx} \
 			$RPM_BUILD_ROOT%{_bindir}
@@ -83,6 +86,7 @@ install doc/BitchX.1	$RPM_BUILD_ROOT%{_mandir}/man1
 install %{SOURCE1}	$RPM_BUILD_ROOT%{_sysconfdir}/irc/ircII.servers
 install %{SOURCE2}	$RPM_BUILD_ROOT%{_applnkdir}/Network/Communications/BitchX.desktop
 install %{SOURCE3}	$RPM_BUILD_ROOT%{_datadir}/%{name}/script/bxglobal
+install %{SOURCE4}	$RPM_BUILD_ROOT%{_mandir}/pl/man1/BitchX.1
 
 gzip -9nf doc/BitchX{-format,-idea,.bot,.doc,.faq,.tcl} IPv6-support dll/europa/{README,knowledgebase.sql}
 
@@ -121,6 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_applnkdir}/Network/Communications/*
 %{_pixmapsdir}/*
 %{_mandir}/man1/*
+%lang(pl) %{_mandir}/pl/man1/*
 
 %files europa
 %defattr(644,root,root,755)
