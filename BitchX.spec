@@ -20,12 +20,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_datadir %{_libdir}
 
-%description 
+%description
 BitchX is a popular ANSI color ircII client by panasync. It
 incorporates various features that would normally require a script.
 It's interface is more colorful and cleaner than ircII.
 
-%description -l pl 
+%description -l pl
 BitchX jest popularnym klientem ircII. Jego interfejs jest bardziej
 kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
 
@@ -65,15 +65,15 @@ install source/wserv \
 
 install script/*	$RPM_BUILD_ROOT%{_datadir}/%{name}/script
 install translation/*	$RPM_BUILD_ROOT%{_datadir}/%{name}/translation
-cp -pfr bitchx-docs/* 	$RPM_BUILD_ROOT%{_datadir}/%{name}/help
+cp -pfr bitchx-docs/*	$RPM_BUILD_ROOT%{_datadir}/%{name}/help
 
 install doc/BitchX.png	$RPM_BUILD_ROOT%{_pixmapsdir}
 
 install doc/BitchX.1	$RPM_BUILD_ROOT%{_mandir}/man1
 
-install %{SOURCE1} 	$RPM_BUILD_ROOT%{_sysconfdir}/irc/ircII.servers
-install %{SOURCE2} 	$RPM_BUILD_ROOT%{_applnkdir}/Network/Communications/BitchX.desktop
-install %{SOURCE3} 	$RPM_BUILD_ROOT%{_datadir}/%{name}/script/bxglobal
+install %{SOURCE1}	$RPM_BUILD_ROOT%{_sysconfdir}/irc/ircII.servers
+install %{SOURCE2}	$RPM_BUILD_ROOT%{_applnkdir}/Network/Communications/BitchX.desktop
+install %{SOURCE3}	$RPM_BUILD_ROOT%{_datadir}/%{name}/script/bxglobal
 
 gzip -9nf doc/BitchX{-format,-idea,.bot,.doc,.faq,.tcl} IPv6-support dll/europa/{README,knowledgebase.sql}
 
@@ -82,10 +82,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/*.gz *.gz 
+%doc doc/*.gz *.gz
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/irc/*
 %dir %{_datadir}/BitchX
+%dir %{_datadir}/BitchX/plugins
 %attr(755,root,root) %{_datadir}/BitchX/plugins/acro.so
 %attr(755,root,root) %{_datadir}/BitchX/plugins/aim.so
 %attr(755,root,root) %{_datadir}/BitchX/plugins/arcfour.so
