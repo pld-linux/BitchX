@@ -1,0 +1,358 @@
+--- BitchX/dll/aim/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/aim/Makefile.in	2004-06-18 12:50:40.000000000 +0200
+@@ -160,7 +160,7 @@
+ 
+ PLUGIN_NAME = aim
+ 
+-OBJS = toc.o util.o cmd.o aim.o $(topdir)/source/compat.o
++OBJS = toc.o util.o cmd.o aim.o compat.o
+ 
+ all: Makefile toc aim$(SHLIB_SUFFIX)
+ 
+@@ -168,21 +168,21 @@
+ 	cd $(topdir) \
+ 	  && ./config.status
+ 
+-$(topdir)/source/compat.o: $(top_srcdir)/source/compat.c
+-	$(CC) $(AIMDEFS) $(CFLAGS) \
+-		-c $(top_srcdir)/source/compat.c -o $(topdir)/source/compat.o
++compat.o: $(top_srcdir)/source/compat.c
++	$(CC) $(AIMDEFS) $(CFLAGS) $(SHLIB_CFLAGS) \
++		-c $(top_srcdir)/source/compat.c -o compat.o
+ 
+ toc.o: $(srcdir)/toc.c
+-	$(CC) $(AIMDEFS) $(CFLAGS) -c $(srcdir)/toc.c
++	$(CC) $(AIMDEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/toc.c
+ 
+ util.o: $(srcdir)/util.c
+-	$(CC) $(AIMDEFS) $(CFLAGS) -c $(srcdir)/util.c
++	$(CC) $(AIMDEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/util.c
+ 
+ cmd.o: $(srcdir)/cmd.c
+-	$(CC) $(AIMDEFS) $(CFLAGS) -c $(srcdir)/cmd.c
++	$(CC) $(AIMDEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/cmd.c
+ 
+ aim.o: $(srcdir)/aim.c
+-	$(CC) $(AIMDEFS) $(CFLAGS) -c $(srcdir)/aim.c
++	$(CC) $(AIMDEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/aim.c
+ 
+ aim$(SHLIB_SUFFIX): $(OBJS) 
+ 	$(SHLIB_LD) $(OBJS) $(SHLIB_CFLAGS) -o aim$(SHLIB_SUFFIX) -Ltoc -ltoc
+--- BitchX/dll/amp/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/amp/Makefile.in	2004-06-18 12:51:12.000000000 +0200
+@@ -187,7 +187,7 @@
+ OS := $(shell uname -s) 
+ 
+ .c.o:
+-	$(CC) -DOS_$(OS) $(DEFS) $(CFLAGS) -c $<
++	$(CC) -DOS_$(OS) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $<
+ 
+ depend:
+ 	gcc -MM $(CPPFLAGS) $(DEFS) $(CFLAGS) *.c > .depend
+--- BitchX/dll/nap/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/nap/Makefile.in	2004-06-18 13:02:29.000000000 +0200
+@@ -166,27 +166,27 @@
+ 	cd $(topdir) \
+ 	  && ./config.status
+ 
+-$(topdir)/source/compat.o: $(top_srcdir)/source/compat.c
+-	$(CC) $(DEFS) $(CFLAGS) \
+-		-c $(top_srcdir)/source/compat.c -o $(topdir)/source/compat.o
++compat.o: $(top_srcdir)/source/compat.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) \
++		-c $(top_srcdir)/source/compat.c -o compat.o
+ 
+ nap.o: $(srcdir)/nap.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/nap.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/nap.c
+ 
+ napsend.o: $(srcdir)/napsend.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/napsend.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/napsend.c
+ 
+ nap_file.o: $(srcdir)/nap_file.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/nap_file.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/nap_file.c
+ 
+ napfunc.o: $(srcdir)/napfunc.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/napfunc.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/napfunc.c
+ 
+ napother.o: $(srcdir)/napother.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/napother.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/napother.c
+ 
+ md5.o: $(srcdir)/md5.c $(srcdir)/md5.h
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/md5.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/md5.c
+ 
+ nap$(SHLIB_SUFFIX): $(OBJS) 
+ 	$(SHLIB_LD) $(OBJS) $(SHLIB_CFLAGS) -o nap$(SHLIB_SUFFIX)
+--- BitchX/dll/qbx/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/qbx/Makefile.in	2004-06-18 13:03:34.000000000 +0200
+@@ -164,7 +164,7 @@
+ 	  && ./config.status
+ 
+ qbx.o: $(srcdir)/qbx.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/qbx.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/qbx.c
+ 
+ qbx$(SHLIB_SUFFIX): qbx.o ../dllinit.o
+ 	$(SHLIB_LD) qbx.o ../dllinit.o $(SHLIB_CFLAGS) -o qbx$(SHLIB_SUFFIX)
+--- BitchX/dll/abot/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/abot/Makefile.in	2004-06-18 12:48:51.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ autobot.o: $(srcdir)/autobot.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/autobot.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/autobot.c
+ 
+ autobot$(SHLIB_SUFFIX): autobot.o ../dllinit.o
+ 	$(SHLIB_LD) autobot.o ../dllinit.o $(SHLIB_CFLAGS) -o autobot$(SHLIB_SUFFIX)
+--- BitchX/dll/acro/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/acro/Makefile.in	2004-06-18 12:49:08.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ acro.o: $(srcdir)/acro.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/acro.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/acro.c
+ 
+ acro$(SHLIB_SUFFIX): acro.o ../dllinit.o
+ 	$(SHLIB_LD) acro.o ../dllinit.o $(SHLIB_CFLAGS) -o acro$(SHLIB_SUFFIX)
+--- BitchX/dll/hint/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/hint/Makefile.in	2004-06-18 12:59:34.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ hint.o: $(srcdir)/hint.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/hint.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/hint.c
+ 
+ hint$(SHLIB_SUFFIX): hint.o ../dllinit.o
+ 	$(SHLIB_LD) hint.o ../dllinit.o $(SHLIB_CFLAGS) -o hint$(SHLIB_SUFFIX)
+--- BitchX/dll/pkga/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/pkga/Makefile.in	2004-06-18 13:02:57.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ pkga.o: $(srcdir)/pkga.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/pkga.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/pkga.c
+ 
+ pkga$(SHLIB_SUFFIX): pkga.o ../dllinit.o
+ 	$(SHLIB_LD) pkga.o ../dllinit.o $(SHLIB_CFLAGS) -o pkga$(SHLIB_SUFFIX)
+--- BitchX/dll/scan/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/scan/Makefile.in	2004-06-18 13:03:57.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ scan.o: $(srcdir)/scan.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/scan.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/scan.c
+ 
+ scan$(SHLIB_SUFFIX): scan.o ../dllinit.o
+ 	$(SHLIB_LD) scan.o ../dllinit.o $(SHLIB_CFLAGS) -o scan$(SHLIB_SUFFIX)
+@@ -177,4 +177,4 @@
+ 	$(RM) Makefile
+ 
+ install:
+-	$(INSTALL) $(PLUGIN_NAME)$(SHLIB_SUFFIX) $(PLUGINDIR)
+\ Brak znaku nowej linii na koñcu pliku
++	$(INSTALL) $(PLUGIN_NAME)$(SHLIB_SUFFIX) $(PLUGINDIR)
+--- BitchX/dll/xmms/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/xmms/Makefile.in	2004-06-18 13:04:22.000000000 +0200
+@@ -167,7 +167,7 @@
+ 	  && ./config.status
+ 
+ xmms.o: $(srcdir)/xmms.c
+-	$(CC) $(DEFS) $(CFLAGS) `xmms-config --cflags` -c $(srcdir)/xmms.c
++	$(CC) $(DEFS) $(CFLAGS) `xmms-config --cflags` $(SHLIB_CFLAGS) -c $(srcdir)/xmms.c
+ 
+ xmms$(SHLIB_SUFFIX): xmms.o ../dllinit.o
+ 	$(SHLIB_LD) xmms.o ../dllinit.o $(SHLIB_CFLAGS) -o xmms$(SHLIB_SUFFIX) `xmms-config --libs`
+--- BitchX/dll/nicklist/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/nicklist/Makefile.in	2004-06-18 13:02:41.000000000 +0200
+@@ -168,7 +168,7 @@
+ 	  && ./config.status
+ 
+ nicklist.o: $(srcdir)/nicklist.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/nicklist.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/nicklist.c
+ 
+ nicklist$(SHLIB_SUFFIX): nicklist.o ../dllinit.o
+ 	$(SHLIB_LD) nicklist.o ../dllinit.o $(SHLIB_CFLAGS) -o nicklist$(SHLIB_SUFFIX)
+--- BitchX/dll/cdrom/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/cdrom/Makefile.in	2004-06-18 12:52:19.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ cdrom.o: $(srcdir)/cdrom.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/cdrom.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/cdrom.c
+ 
+ cdrom$(SHLIB_SUFFIX): cdrom.o ../dllinit.o
+ 	$(SHLIB_LD) cdrom.o ../dllinit.o ${SHLIB_CFLAGS} -o cdrom$(SHLIB_SUFFIX)
+--- BitchX/dll/fserv/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/fserv/Makefile.in	2004-06-18 12:59:20.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ fserv.o: $(srcdir)/fserv.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/fserv.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/fserv.c
+ 
+ fserv$(SHLIB_SUFFIX): fserv.o ../dllinit.o
+ 	$(SHLIB_LD) fserv.o ../dllinit.o $(SHLIB_CFLAGS) -o fserv$(SHLIB_SUFFIX)
+--- BitchX/dll/qmail/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/qmail/Makefile.in	2004-06-18 13:03:44.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ qmail.o: $(srcdir)/qmail.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/qmail.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/qmail.c
+ 
+ qmail$(SHLIB_SUFFIX): qmail.o ../dllinit.o
+ 	$(SHLIB_LD) qmail.o ../dllinit.o $(SHLIB_CFLAGS) -o qmail$(SHLIB_SUFFIX)
+--- BitchX/dll/encrypt/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/encrypt/Makefile.in	2004-06-18 12:52:31.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ encrypt.o: $(srcdir)/encrypt.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/encrypt.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/encrypt.c
+ 
+ encrypt$(SHLIB_SUFFIX): encrypt.o ../dllinit.o
+ 	$(SHLIB_LD) encrypt.o ../dllinit.o ${SHLIB_CFLAGS} -o encrypt$(SHLIB_SUFFIX)
+--- BitchX/dll/blowfish/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/blowfish/Makefile.in	2004-06-18 12:51:52.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ blowfish.o: $(srcdir)/blowfish.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/blowfish.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/blowfish.c
+ 
+ blowfish$(SHLIB_SUFFIX): blowfish.o ../dllinit.o
+ 	$(SHLIB_LD) blowfish.o ../dllinit.o $(SHLIB_CFLAGS) -o blowfish$(SHLIB_SUFFIX) $(TCL_LIBS)
+--- BitchX/dll/europa/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/europa/Makefile.in	2004-06-18 12:59:06.000000000 +0200
+@@ -170,7 +170,7 @@
+ 	  && ./config.status
+ 
+ europa.o: $(srcdir)/europa.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/europa.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/europa.c
+ 
+ europa$(SHLIB_SUFFIX): europa.o ../dllinit.o
+ 	$(SHLIB_LD) europa.o ../dllinit.o $(SHLIB_CFLAGS) -o europa$(SHLIB_SUFFIX) $(MYSQL_LIBS)
+--- BitchX/dll/identd/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/identd/Makefile.in	2004-06-18 12:59:46.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ identd.o: $(srcdir)/identd.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/identd.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/identd.c
+ 
+ identd$(SHLIB_SUFFIX): identd.o ../dllinit.o
+ 	$(SHLIB_LD) identd.o ../dllinit.o $(SHLIB_CFLAGS) -o identd$(SHLIB_SUFFIX)
+--- BitchX/dll/possum/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/possum/Makefile.in	2004-06-18 13:03:23.000000000 +0200
+@@ -165,13 +165,13 @@
+ 	  && ./config.status
+ 
+ possum.o: $(srcdir)/possum.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/possum.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/possum.c
+ 
+ head.o: $(srcdir)/head.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/head.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/head.c
+ 
+ llist.o: $(srcdir)/llist.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/llist.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/llist.c
+ 
+ possum$(SHLIB_SUFFIX): possum.o head.o llist.o ../dllinit.o
+ 	$(SHLIB_LD) possum.o llist.o head.o ../dllinit.o $(SHLIB_CFLAGS) -o possum$(SHLIB_SUFFIX)
+--- BitchX/dll/autocycle/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/autocycle/Makefile.in	2004-06-18 12:51:41.000000000 +0200
+@@ -168,7 +168,7 @@
+ 	  && ./config.status
+ 
+ autocycle.o: $(srcdir)/autocycle.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/autocycle.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/autocycle.c
+ 
+ autocycle$(SHLIB_SUFFIX): autocycle.o ../dllinit.o
+ 	$(SHLIB_LD) autocycle.o ../dllinit.o $(SHLIB_CFLAGS) -o autocycle$(SHLIB_SUFFIX)
+--- BitchX/dll/arcfour/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/arcfour/Makefile.in	2004-06-18 12:51:29.000000000 +0200
+@@ -165,10 +165,10 @@
+ 	  && ./config.status
+ 
+ arcfour.o: $(srcdir)/arcfour.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/arcfour.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/arcfour.c
+ 
+ md5.o: $(srcdir)/md5.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/md5.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/md5.c
+ 
+ arcfour$(SHLIB_SUFFIX): arcfour.o md5.o ../dllinit.o
+ 	$(SHLIB_LD) arcfour.o md5.o ../dllinit.o $(SHLIB_CFLAGS) -o arcfour$(SHLIB_SUFFIX)
+--- BitchX/dll/wavplay/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/wavplay/Makefile.in	2004-06-18 13:04:09.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ wavplay.o: $(srcdir)/wavplay.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/wavplay.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/wavplay.c
+ 
+ wavplay$(SHLIB_SUFFIX): wavplay.o ../dllinit.o
+ 	$(SHLIB_LD) wavplay.o ../dllinit.o $(SHLIB_CFLAGS) -o wavplay$(SHLIB_SUFFIX)
+@@ -177,4 +177,4 @@
+ 	$(RM) Makefile
+ 
+ install:
+-	$(INSTALL) $(PLUGIN_NAME)$(SHLIB_SUFFIX) $(PLUGINDIR)
+\ Brak znaku nowej linii na koñcu pliku
++	$(INSTALL) $(PLUGIN_NAME)$(SHLIB_SUFFIX) $(PLUGINDIR)
+--- BitchX/dll/cavlink/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/cavlink/Makefile.in	2004-06-18 12:52:06.000000000 +0200
+@@ -165,7 +165,7 @@
+ 	  && ./config.status
+ 
+ cavlink.o: $(srcdir)/cavlink.c
+-	$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/cavlink.c
++	$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/cavlink.c
+ 
+ cavlink$(SHLIB_SUFFIX): cavlink.o ../dllinit.o
+ 	$(SHLIB_LD) cavlink.o ../dllinit.o ${SHLIB_CFLAGS} -o cavlink$(SHLIB_SUFFIX)
+--- BitchX/dll/Makefile.in.orig	2003-04-11 03:09:05.000000000 +0200
++++ BitchX/dll/Makefile.in	2004-06-18 13:04:49.000000000 +0200
+@@ -191,7 +191,7 @@
+ dllinit.o:
+ 	@( \
+ 		if test x"$(PLUGINS)" != x""; then \
+-			$(CC) $(DEFS) $(CFLAGS) -c $(srcdir)/dllinit.c; \
++			$(CC) $(DEFS) $(CFLAGS) $(SHLIB_CFLAGS) -c $(srcdir)/dllinit.c; \
+ 		fi; \
+ 	)
+ 
+--- BitchX/dll/aim/toc/Makefile.in.orig	2003-04-11 03:09:06.000000000 +0200
++++ BitchX/dll/aim/toc/Makefile.in	2004-06-18 13:19:52.000000000 +0200
+@@ -159,7 +159,7 @@
+ #DEBUG_CFLAGS = -g -DDEBUG_LIB_TOC
+ 
+ .c.o:
+-	$(CC) $(DEFS) $(CFLAGS) $(DEBUG_CFLAGS)  -c $<
++	$(CC) $(DEFS) $(CFLAGS) $(DEBUG_CFLAGS) $(SHLIB_CFLAGS) -c $<
+ 
+ LOBJS = toc.o network.o util.o server.o interface.o buddy.o ll.o misc.o
+ 
