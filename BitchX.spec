@@ -8,8 +8,8 @@ Source1:	ircII.servers
 Source2:	ftp://ftp.acronet.net/pub/ircii/epic3.004-help.tar.gz
 Source3:	bitchx.1
 Copyright:	GPL
-Group:		Applications/Communications
-Group(pl):	Aplikacje/Komunikacja
+Group:		Applications/Networking
+Group(pl):	Aplikacje/Sieciowe
 Patch0:		%{name}-75.patch
 Patch1:		%{name}-pld.patch
 Patch2:		%{name}-75.iso2.patch
@@ -26,7 +26,7 @@ script. It's interface is more colorful and cleaner than ircII.
 
 %description -l pl 
 BitchX jest popularnym klientem ircII. Jego interfejs jest bardziej 
-kolorowy i przej¿ysty ni¿ interfejs standardowego kilienta ircII.
+kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
 
 %prep
 %setup -q -n %{name}
