@@ -1,5 +1,4 @@
 Summary:     Improved color IRC client with built-in scripts
-Summary(pl): Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Name:        BitchX
 Version:     75p1
 Release:     2
@@ -10,7 +9,8 @@ Source0:     ftp://ftp.bitchx.com/pub/BitchX/source/ircii-pana-%{version}.tar.gz
 Source1:     ftp://ftp.acronet.net/pub/ircii/epic3.004-help.tar.gz
 Source2:     BitchX.wmconfig
 Patch0:      BitchX.patch
-BuildRoot:   /tmp/%{name}-%{version}-root
+BuildRoot:   /tmp/buildroot-%{name}-%{version}
+Summary(pl): Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
  
 %description 
 BitchX is a popular ANSI color ircII client by panasync. It
@@ -19,7 +19,7 @@ script. It's interface is more colorful and cleaner than ircII.
 
 %description -l pl 
 BitchX jest popularnym klientem ircII. Jego interfejs jest bardziej 
-kolorowy i przej¿ysty ni¿ interfejs standardowego kilienta ircII.
+kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
 
 %prep
 %setup -q -n %{name}
