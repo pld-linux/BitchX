@@ -26,6 +26,11 @@ URL:		http://www.bitchx.org/
 BuildRequires:	mysql-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+ExcludeArch:	alpha sparc64 ia64 ppc64 amd64
+
+%ifarch sparc ppc
+%define		no_install_post_strip 1
+%endif
 
 %define		_datadir	%{_libdir}
 
