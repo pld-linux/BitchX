@@ -31,12 +31,21 @@ kolorowy i przejrzysty ni¿ interfejs standardowego kilienta ircII.
 
 %package europa
 Summary:	Europa Plugin
+Summary(pl):	Wtyczka Europa
 Group:		Applications/Networking
 Group(de):	Applikationen/Netzwerkwesen
 Group(pl):	Aplikacje/Sieciowe
 Requires:	BitchX = %{version}
 
 %description europa
+Europa is a BitchX plugin to provide easy access to an SQL
+knowledgebase. This is helpful for use in help channels where common
+questions repeatedly come up.
+
+%description europa -l pl
+Europa jest wtyczk± do BitchX zapewniaj±c± ³atwy dostêp do SQL-owej
+bazy wiedzy. Jest przydatny na kana³ach pomocy, gdzie czêsto
+powtarzaj± siê te same pytania.
 
 %prep
 %setup -q -n %{name}
