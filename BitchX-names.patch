@@ -1,0 +1,39 @@
+--- BitchX/source/names.c.orig	Sat May 10 22:34:52 2003
++++ BitchX/source/names.c	Sat May 10 22:37:48 2003
+@@ -12,7 +12,7 @@
+ 
+ 
+ #include "irc.h"
+-static char cvsrevision[] = "$Id$";
++static char cvsrevision[] = "$Id$";
+ CVS_REVISION(names_c)
+ #include "struct.h"
+ 
+@@ -572,7 +572,7 @@
+ 
+    	*nmodes = 0;
+    	*nargs = 0;
+-	for (; *modes && strlen(nmodes) < sizeof(nmodes)-2; modes++)
++	for (; *modes && (strlen(nmodes) + 2) < sizeof nmodes; modes++)
+ 	{
+ 		isbanned = isopped = isvoiced = 0;
+ 		switch (*modes) 
+@@ -742,7 +742,8 @@
+ 
+    /* modes which can be done multiple times are added here */
+ 
+-	for (tucm = ucm; tucm && strlen(nmodes) < sizeof(nmodes)-2; tucm = tucm->next)
++	for (tucm = ucm; tucm && (strlen(nmodes) + 2) < sizeof nmodes;
++		tucm = tucm->next)
+ 	{
+ 		if (tucm->o_ed) 
+ 		{
+@@ -1003,7 +1004,7 @@
+ 				malloc_strcpy(key, next_arg(rest, &rest));
+ 			else
+ 			{
+-				if (rest && *key && !my_strnicmp(rest, *key, strlen(*key)))
++				if (rest && *key && (!my_strnicmp(rest, *key, strlen(*key)) || rest[0] == '*'))
+ 					next_arg(rest, &rest);
+ 				new_free(key);
+ 			}
