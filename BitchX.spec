@@ -119,7 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc Changelog doc/BitchX{.doc,.faq} doc/tcl/BitchX.tcl IPv6-support dll/europa/{README,knowledgebase.sql}
 %attr(755,root,root) %{_bindir}/*
-%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/irc/*
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/irc/*
 %dir %{_datadir}/BitchX
 %dir %{_datadir}/BitchX/plugins
 %attr(755,root,root) %{_datadir}/BitchX/plugins/acro.so
