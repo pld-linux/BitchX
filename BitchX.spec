@@ -78,7 +78,7 @@ rm -f dll/europa/corba/ai-client dll/europa/cse476/p1 \
 	bitchx-docs/findcomm
 
 %build
-CFLAGS="%{rpmcflags} -I%{_includedir}/ncurses -fno-strict-aliasing"
+CFLAGS="%{rpmcflags} -I/usr/include/ncurses -fno-strict-aliasing"
 %configure \
 	--enable-ipv6 \
 	--with-plugins=all
