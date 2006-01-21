@@ -22,7 +22,6 @@ Patch4:		%{name}-353fix.patch
 Patch5:		%{name}-security.patch
 Patch6:		%{name}-types.patch
 Patch7:		%{name}-pic.patch
-Icon:		BitchX.xpm
 URL:		http://www.bitchx.org/
 BuildRequires:	mysql-devel
 BuildRequires:	ncurses-devel >= 5.0
