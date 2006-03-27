@@ -4,7 +4,7 @@ Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Summary(pt_BR):	Cliente IRC para o console do Linux
 Name:		BitchX
 Version:	1.1
-Release:	6
+Release:	7
 %define	pre	-final
 License:	GPL
 Group:		Applications/Networking
