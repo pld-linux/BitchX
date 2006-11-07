@@ -143,7 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/BitchX/help
 %{_datadir}/BitchX/script
 %{_datadir}/BitchX/translation
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man1/*
 %lang(pl) %{_mandir}/pl/man1/*
