@@ -1,7 +1,7 @@
 Summary:	Improved color IRC client with built-in scripts
-Summary(es.UTF-8):   Cliente IRC para la consola Linux
-Summary(pl.UTF-8):   Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
-Summary(pt_BR.UTF-8):   Cliente IRC para o console do Linux
+Summary(es.UTF-8):	Cliente IRC para la consola Linux
+Summary(pl.UTF-8):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
+Summary(pt_BR.UTF-8):	Cliente IRC para o console do Linux
 Name:		BitchX
 Version:	1.1
 Release:	7
@@ -46,7 +46,7 @@ trabalhar que a do ircII :)
 
 %package europa
 Summary:	Europa Plugin
-Summary(pl.UTF-8):   Wtyczka Europa
+Summary(pl.UTF-8):	Wtyczka Europa
 Group:		Applications/Networking
 Requires:	BitchX = %{version}-%{release}
 
