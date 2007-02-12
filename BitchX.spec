@@ -1,7 +1,7 @@
 Summary:	Improved color IRC client with built-in scripts
-Summary(es):	Cliente IRC para la consola Linux
-Summary(pl):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
-Summary(pt_BR):	Cliente IRC para o console do Linux
+Summary(es.UTF-8):   Cliente IRC para la consola Linux
+Summary(pl.UTF-8):   Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
+Summary(pt_BR.UTF-8):   Cliente IRC para o console do Linux
 Name:		BitchX
 Version:	1.1
 Release:	7
@@ -34,19 +34,19 @@ BitchX is a popular ANSI color ircII client by panasync. It
 incorporates various features that would normally require a script.
 It's interface is more colorful and cleaner than ircII.
 
-%description -l pl
+%description -l pl.UTF-8
 BitchX jest popularnym klientem ircII. Jego interfejs jest bardziej
-kolorowy i przejrzysty ni¿ interfejs standardowego klienta ircII.
+kolorowy i przejrzysty niÅ¼ interfejs standardowego klienta ircII.
 
-%description -l pt_BR
-O BitchX é um cliente de IRC com suporte a cores para o console do
-Linux. Ele incorpora várias características que normalmente
-requereriam um script, e a sua interface é mais colorida, e simples de
+%description -l pt_BR.UTF-8
+O BitchX Ã© um cliente de IRC com suporte a cores para o console do
+Linux. Ele incorpora vÃ¡rias caracterÃ­sticas que normalmente
+requereriam um script, e a sua interface Ã© mais colorida, e simples de
 trabalhar que a do ircII :)
 
 %package europa
 Summary:	Europa Plugin
-Summary(pl):	Wtyczka Europa
+Summary(pl.UTF-8):   Wtyczka Europa
 Group:		Applications/Networking
 Requires:	BitchX = %{version}-%{release}
 
@@ -55,10 +55,10 @@ Europa is a BitchX plugin to provide easy access to an SQL
 knowledgebase. This is helpful for use in help channels where common
 questions repeatedly come up.
 
-%description europa -l pl
-Europa jest wtyczk± do BitchX zapewniaj±c± ³atwy dostêp do SQL-owej
-bazy wiedzy. Jest przydatny na kana³ach pomocy, gdzie czêsto
-powtarzaj± siê te same pytania.
+%description europa -l pl.UTF-8
+Europa jest wtyczkÄ… do BitchX zapewniajÄ…cÄ… Å‚atwy dostÄ™p do SQL-owej
+bazy wiedzy. Jest przydatny na kanaÅ‚ach pomocy, gdzie czÄ™sto
+powtarzajÄ… siÄ™ te same pytania.
 
 %prep
 %setup -q -n %{name}
