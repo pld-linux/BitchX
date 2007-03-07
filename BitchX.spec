@@ -1,11 +1,11 @@
+%define	pre	-final
 Summary:	Improved color IRC client with built-in scripts
 Summary(es.UTF-8):	Cliente IRC para la consola Linux
 Summary(pl.UTF-8):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Summary(pt_BR.UTF-8):	Cliente IRC para o console do Linux
 Name:		BitchX
 Version:	1.1
-Release:	7
-%define	pre	-final
+Release:	8
 License:	GPL
 Group:		Applications/Networking
 Source0:	http://www.bitchx.org/files/source/ircii-pana-%{version}%{pre}.tar.gz
@@ -118,6 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc Changelog doc/BitchX{.doc,.faq} doc/tcl/BitchX.tcl IPv6-support dll/europa/{README,knowledgebase.sql}
 %attr(755,root,root) %{_bindir}/*
+%dir %{_sysconfdir}/irc
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/irc/*
 %dir %{_datadir}/BitchX
 %dir %{_datadir}/BitchX/plugins
