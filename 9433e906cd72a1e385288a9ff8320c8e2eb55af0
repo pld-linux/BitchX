@@ -1,0 +1,6 @@
+- security patch (from bugtraq)
+- rel 4
+  Bug:
+  Full of sprintf() calls and relying on BIG_BUFFER_SIZE being large enough.
+  There's multiple ways to exploit it by giving near-BIG_BUFFER_SIZE strings
+  in various places.
