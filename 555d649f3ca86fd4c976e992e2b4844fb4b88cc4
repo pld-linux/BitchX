@@ -1,0 +1,7 @@
+- spec adapterized,
+- added package icon, desktop file and menu icon,
+- removed antiroot patch,
+- removed some files from %doc,
+- added --enable-ipv6 to ./configure parameters,
+- fixed passing LDFLAGS to ./configure environment (stripping in %install is
+  not neccessary now).
