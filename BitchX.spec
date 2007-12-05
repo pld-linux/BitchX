@@ -4,12 +4,12 @@ Summary(es.UTF-8):	Cliente IRC para la consola Linux
 Summary(pl.UTF-8):	Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Summary(pt_BR.UTF-8):	Cliente IRC para o console do Linux
 Name:		BitchX
-Version:	1.1
-Release:	8
+Version:	1.1a
+Release:	1
 License:	GPL
 Group:		Applications/Networking
 Source0:	http://www.bitchx.org/files/source/ircii-pana-%{version}%{pre}.tar.gz
-# Source0-md5:	611d2dda222f00c10140236f4c331572
+# Source0-md5:	f1ef121d17c32ed90fe598ed36dd6844
 Source1:	ircII.servers
 Source2:	%{name}.desktop
 Source3:	%{name}-bxglobal.script
@@ -68,7 +68,7 @@ powtarzają się te same pytania.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
+#%patch6 -p1
 %patch7 -p1
 
 # kill any precompiled x86 binaries
