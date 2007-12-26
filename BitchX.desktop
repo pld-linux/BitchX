@@ -1,12 +1,11 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=BitchX
 Comment=The Ultimate IRC Client
 Comment[es]=Cliente IRC para la consola Linux
 Comment[pl]=Ulepszony, kolorowy klient IRC z wbudowanymi skryptami
 Comment[pt_BR]=Cliente IRC para o console do Linux
 Exec=BitchX
-Icon=BitchX.xpm
+Icon=BitchX
 Terminal=true
 Type=Application
 Categories=ConsoleOnly;Network;IRCClient;
